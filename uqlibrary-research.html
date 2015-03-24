@@ -69,19 +69,20 @@ Element providing an overview for student's courses
 
           </paper-tabs>
 
-          <core-animated-pages id="animatedPages" transitions="slide-from-right" block selected="{{ selectedTab }}"
+          <core-animated-pages id="animatedPages" transitions="slide-from-right" block
+                               selected="{{ selectedTab }}" valueattr="name"
                                on-core-animated-pages-transition-prepare="{{transitionPrepareHandler}}"
                                on-core-animated-pages-transition-end="{{transitionEndHandler}}">
 
-            <section id="sectionTrending" name="Trending" hidden?="{{ selectedTab != 'Trending' }}">
+            <section id="sectionTrending" name="Trending">
               <uqlibrary-research-trending></uqlibrary-research-trending>
             </section>
 
-            <section id="sectionMetrics" name="Metrics" hidden?="{{ selectedTab != 'Metrics' }}">
+            <section id="sectionMetrics" name="Metrics">
               <uqlibrary-research-metrics></uqlibrary-research-metrics>
             </section>
 
-            <section id="sectionPublications" name="Publications" hidden?="{{ selectedTab != 'Publications' }}">
+            <section id="sectionPublications" name="Publications">
               <div><h2>This is publications info</h2></div>
             </section>
 
