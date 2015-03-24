@@ -1,0 +1,161 @@
+<!--
+Element providing an overview for student's courses
+
+##### Example
+
+    <uqlibrary-research></uqlibrary-research>
+
+@element uqlibrary-research
+@blurb Element providing an overview of a researcher
+@status alpha
+@homepage http://uqlibrary.github.io/uqlibrary-research
+-->
+
+<link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
+<link rel="import" href="uqlibrary-research-trending.html">
+<link rel="import" href="uqlibrary-research-metrics.html">
+
+<polymer-element name="uqlibrary-research" layout center attributes="autoload">
+
+  <template>
+
+    <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
+
+    <core-signals on-core-signal-transitioning-change="{{transitioningChangeHandler}}"></core-signals>
+
+    <uqlibrary-api-account id="account"></uqlibrary-api-account>
+    <uqlibrary-ga id="ga" appName="Research"></uqlibrary-ga>
+
+    <core-drawer-panel id="drawerPanel" class="drawer" drawerWidth="256px" responsiveWidth="768px">
+      <core-header-panel drawer>
+        <uqlibrary-menu account="{{user}}"></uqlibrary-menu>
+      </core-header-panel>
+
+      <core-header-panel main class="main">
+        <core-toolbar>
+          <core-a11y-keys id="a11yToolBarLeftButton" target="{{$.toolBarLeftButton}}" keys="{{keyboardNavigationKeys}}"
+                          on-keys-pressed="{{ a11yKeyPressed }}"></core-a11y-keys>
+          <paper-icon-button id="toolBarLeftButton" icon="menu" core-drawer-toggle></paper-icon-button>
+          <h1 flex id="toolbar-page-title">My research</h1>
+        </core-toolbar>
+
+        <div id="content">
+
+          <paper-tabs id="tabs" selected="{{ selectedTab }}" on-core-select="{{ tabSelected }}">
+
+            <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
+              <div class="menu">
+                <uqlibrary-a11y-link>
+                  <div class="tabTitle" layout vertical center>Trending</div>
+                </uqlibrary-a11y-link>
+              </div>
+            </paper-tab>
+
+            <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
+              <div class="menu">
+                <uqlibrary-a11y-link>
+                  <div class="tabTitle" layout vertical center>Metrics</div>
+                </uqlibrary-a11y-link>
+              </div>
+            </paper-tab>
+
+            <paper-tab name="Publications" id="tabPublications" aria-label="My publications">
+              <div class="menu">
+                <uqlibrary-a11y-link>
+                  <div class="tabTitle" layout vertical center>Publications</div>
+                </uqlibrary-a11y-link>
+              </div>
+            </paper-tab>
+
+          </paper-tabs>
+
+          <core-animated-pages id="animatedPages" transitions="slide-from-right" block selected="{{ selectedTab }}"
+                               on-core-animated-pages-transition-prepare="{{transitionPrepareHandler}}"
+                               on-core-animated-pages-transition-end="{{transitionEndHandler}}">
+
+            <section id="sectionTrending" name="Trending" hidden?="{{ selectedTab != 'Trending' }}">
+              <uqlibrary-research-trending></uqlibrary-research-trending>
+            </section>
+
+            <section id="sectionMetrics" name="Metrics" hidden?="{{ selectedTab != 'Metrics' }}">
+              <uqlibrary-research-metrics></uqlibrary-research-metrics>
+            </section>
+
+            <section id="sectionPublications" name="Publications" hidden?="{{ selectedTab != 'Publications' }}">
+              <div><h2>This is publications info</h2></div>
+            </section>
+
+          </core-animated-pages>
+
+        </div>
+      </core-header-panel>
+
+    </core-drawer-panel>
+
+  </template>
+
+  <script>
+    Polymer('uqlibrary-research', {
+
+      // Accessibility issues fixes
+      keyboardNavigationKeys: 'space enter',
+
+      a11yKeyPressed: function(source, event) {
+        if (source.path && source.path.length > 0 && source.path[0].target) {
+          source.path[0].target.fire("tap");
+        }
+      },
+
+      autoload: true,
+      selectedTab: 'Trending',
+      transitioning: false,
+      user: {},
+
+      /**
+       * Show/hide main menu
+       * */
+      togglePanel: function () {
+        this.$.drawerPanel.togglePanel();
+      },
+
+      ready: function() {
+        var that = this;
+
+        this.$.account.addEventListener('uqlibrary-api-account-loaded', function(e) {
+          if (e.detail.hasSession) {
+            if(e.detail.classes) {
+              that.user = e.detail;
+            }
+          } else {
+            // Not logged in
+            that.$.account.login(window.location.href);
+          }
+        });
+
+        if (autoload) {
+          this.$.account.get();
+        }
+      },
+
+      selectedTabChanged: function(oldValue, newValue) {
+        if(oldValue && newValue) {
+          this.$.ga.addEvent('Research tab changed', newValue);
+        }
+      },
+
+      transitioningChangeHandler: function(e) {
+        if(e.detail.hasOwnProperty('transitioning'))
+          this.transitioning = e.detail.transitioning;
+      },
+      transitionPrepareHandler: function() {
+        this.transitioning = true;
+        this.fire('core-signal', {name: "transitioning-change", data: {transitioning: this.transitioning}});
+      },
+      transitionEndHandler: function() {
+        this.transitioning = false;
+        this.fire('core-signal', {name: "transitioning-change", data: {transitioning: this.transitioning}});
+      }
+    });
+  </script>
+
+</polymer-element>

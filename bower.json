@@ -1,0 +1,14 @@
+{
+  "name": "uqlibrary-research",
+  "version": "0.0.1",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "private": true,
+  "main": "uqlibrary-research.html",
+  "dependencies": {
+    "uqlibrary-elements": "uqlibrary/uqlibrary-elements#master"
+  }
+}

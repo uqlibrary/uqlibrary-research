@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title>uqlibrary-timeline</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../uqlibrary-research.html">
+</head>
+<body>
+
+<uqlibrary-research autoload="false"></uqlibrary-research>
+
+<script>
+  window.addEventListener('polymer-ready', function() {
+    var parent = document.querySelector('uqlibrary-research');
+
+    describe('uqlibrary-research application unit tests', function () {
+      before(function () {
+      });
+
+      beforeEach(function () {
+      });
+
+      afterEach(function () {
+      });
+
+      it('should display tab control with three tabs', function(done) {
+        setTimeout(function() {
+          var tabsControl = parent.shadowRoot.querySelector('#tabs');
+          expect(tabs).not.to.be.null;
+
+          var tabs = tabsControl.querySelectorAll('paper-tab');
+          expect(tabs.length).to.equal(3);
+
+          done();
+
+        }, 100);
+      });
+    });
+
+  });
+</script>
+
+</body>
+</html>
