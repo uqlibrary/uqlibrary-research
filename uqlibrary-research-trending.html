@@ -1,9 +1,41 @@
 <link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
 
-<polymer-element name="uqlibrary-research-trending" layout center>
+<polymer-element name="uqlibrary-research-trending" layout center attributes="user">
   <template>
-
+    <uqlibrary-api-academic-trending-publications id="api"></uqlibrary-api-academic-trending-publications>
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
+
+    <div id="cards" vertical center-justified layout>
+      <template repeat="{{card in cards}}">
+        <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
+        <div class="subhead cardSection cardTitle">{{card.title}}</div>
+          <template repeat="{{ pub, index in publications[card['type']] }}">
+            <div horizontal layout>
+              <div flex>
+                <div vertical layout class="metric-list">
+                  <div horizontal layout>
+                    <div class="new-title">{{pub.title}}</div><div flex></div>
+                    <div>
+                      <div vertical layout class="metrics" flex self-stretch>
+                        <div self-stretch class="border-left border-bottom altmetrics">
+                          <div class="num-cites">{{pub.count}}</div>
+                          <div class="type-cites">Citations</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
+          </template>
+        </paper-shadow>
+
+      </template>
+      <paper-shadow class="card" z="1">
+        <div class="subhead cardSection cardTitle">Research Guides</div>
+        <p class="link"><core-icon icon="description"></core-icon>Guide to getting published</p>
+        <p class="link"><core-icon icon="arrow-forward"></core-icon>See all research support</p>
+      </paper-shadow>
+    </div>
 
     <div class="card">
       <paper-shadow z="1">
@@ -16,13 +48,43 @@
   <script>
 
     Polymer('uqlibrary-research-trending', {
+      publications: [],
+      user: null,
+
+      cards: [
+        {
+          'type' : 'altmetric',
+          'title' : 'Altmetrics'
+        },
+        {
+          'type' : 'thomson',
+          'title' : 'Web of Science'
+        },
+        {
+          'type' : 'scopus',
+          'title' : 'Scopus'
+        }
+      ],
 
       created: function() {
       },
 
       ready: function() {
         var that = this;
+
+        this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
+          that.publications = e.detail;
+          console.log(that.publications);
+        });
+      },
+
+      userChanged: function(newValue) {
+
+        if(this.user.hasOwnProperty('id')) {
+          this.$.api.get({'username' : this.user.id});
+        }
       }
+
 
     });
 
