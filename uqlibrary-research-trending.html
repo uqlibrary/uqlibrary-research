@@ -8,14 +8,14 @@
     <div id="cards" vertical center-justified layout>
       <template repeat="{{card in cards}}">
         <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
-        <div class="subhead cardSection cardTitle">{{card.title}}</div>
+        <div class="subhead cardSection cardTitle">{{card.title}} </div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
 
                 <div horizontal layout center>
                     <div class="new-title" flex>{{pub.title}}</div>
-                    <div class="num-cites border-left" self-stretch>{{pub.count}}</div>
-                    <div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>
+                    <div class="num-cites border-left" self-stretch>{{pub.count}}<span class="plus">+{{pub.difference | numberFormat}}</span></div>
+                    <!--<div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>-->
                     </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
@@ -41,15 +41,15 @@
       cards: [
         {
           'type' : 'altmetric',
-          'title' : 'Altmetrics'
+          'title' : 'Altmetric Score'
         },
         {
           'type' : 'thomson',
-          'title' : 'Web of Science'
+          'title' : 'Web of Science Citation Count'
         },
         {
           'type' : 'scopus',
-          'title' : 'Scopus'
+          'title' : 'Scopus Citation Count'
         }
       ],
 
@@ -76,7 +76,7 @@
         if (Math.round(_value) == _value) {
           return value;
         } else {
-          return _value.toFixed(1);
+          return _value.toFixed(0);
         }
       }
 
