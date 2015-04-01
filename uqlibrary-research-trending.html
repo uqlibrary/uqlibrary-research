@@ -12,7 +12,7 @@
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
 
-                <div horizontal layout center>
+                <div horizontal layout center class="hoverable">
                     <div class="new-title" flex>{{pub.title}}</div>
                     <div class="num-cites border-left" self-stretch>{{pub.count}}<span class="plus">+{{pub.difference | numberFormat}}</span></div>
                     <!--<div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>-->
