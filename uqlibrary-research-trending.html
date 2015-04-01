@@ -13,21 +13,45 @@
             <div vertical layout>
 
                 <div horizontal layout center class="hoverable">
-                    <div class="new-title" flex>{{pub.title}}</div>
-                    <div class="num-cites border-left" self-stretch>{{pub.count}}<span class="plus">+{{pub.difference | numberFormat}}</span></div>
-                    <!--<div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>-->
+                  <div class="new-title" flex>
+                    <div vertical layout>
+                      <div horizontal layout>
+                        <div flex class="authors">{{pub.authors}}</div>
+                        <div  class="year">{{pub.created | showYear}}</div>
+                      </div>
+                      <div>{{pub.title}}</div>
                     </div>
+                  </div>
+                    <div class="num-cites border-left" self-stretch>
+                      {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">+{{pub.difference | numberFormat}}</span>
+                    </div>
+                    <!--<div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>-->
+                 </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
           </template>
         </paper-shadow>
 
       </template>
-      <paper-shadow class="card" z="1">
-        <div class="subhead cardSection cardTitle">Research Guides</div>
-        <p class="link"><core-icon icon="description"></core-icon>Guide to getting published</p>
-        <p class="link"><core-icon icon="arrow-forward"></core-icon>See all research support</p>
-      </paper-shadow>
+
+      <div class="card">
+        <paper-shadow z="1">
+          <div class="subhead cardSection cardTitle">Research guides</div>
+
+          <div class="cardSection">
+            <a href="http://guides.library.uq.edu.au/getting-published">
+              <core-icon class="link" icon="description" aria-label=""></core-icon>
+              Guide to Getting Published
+            </a>
+          </div>
+          <div class="cardSection">
+            <a href="https://www.library.uq.edu.au/research-support" target="_blank">
+              <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>
+              See all research support
+            </a>
+          </div>
+        </paper-shadow>
+      </div>
     </div>
 
   </template>
@@ -72,12 +96,15 @@
       },
 
       numberFormat: function(value) {
-        var _value = parseFloat(value);
-        if (Math.round(_value) == _value) {
-          return value;
-        } else {
-          return _value.toFixed(0);
+        return parseFloat(value).toFixed(0);
+      },
+
+      showYear: function(value) {
+        var date =  moment.unix(value);// moment(value);
+        if(date.isValid()) {
+          return date.format('YYYY');
         }
+        return value;
       }
 
 
