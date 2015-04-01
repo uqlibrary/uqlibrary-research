@@ -15,7 +15,7 @@
                 <div horizontal layout center>
                     <div class="new-title" flex>{{pub.title}}</div>
                     <div class="num-cites border-left" self-stretch>{{pub.count}}</div>
-                    <div class="num-cites border-left" self-stretch>{{pub.change}}</div>
+                    <div class="num-cites border-left" self-stretch>+{{pub.difference}}</div>
                     </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
