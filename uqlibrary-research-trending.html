@@ -10,20 +10,13 @@
         <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
         <div class="subhead cardSection cardTitle">{{card.title}}</div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
-            <div horizontal layout>
-              <div flex>
-                <div vertical layout class="metric-list">
-                  <div horizontal layout>
-                    <div class="new-title">{{pub.title}}</div><div flex></div>
-                    <div>
-                      <div vertical layout class="metrics" flex self-stretch>
-                        <div self-stretch class="border-left border-bottom altmetrics">
-                          <div class="num-cites">{{pub.count}}</div>
-                          <div class="type-cites">Citations</div>
-                        </div>
-                      </div>
+            <div vertical layout>
+
+                <div horizontal layout center>
+                    <div class="new-title" flex>{{pub.title}}</div>
+                    <div class="num-cites border-left" self-stretch>{{pub.count}}</div>
+                    <div class="num-cites border-left" self-stretch>{{pub.change}}</div>
                     </div>
-                  </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
           </template>
@@ -34,12 +27,6 @@
         <div class="subhead cardSection cardTitle">Research Guides</div>
         <p class="link"><core-icon icon="description"></core-icon>Guide to getting published</p>
         <p class="link"><core-icon icon="arrow-forward"></core-icon>See all research support</p>
-      </paper-shadow>
-    </div>
-
-    <div class="card">
-      <paper-shadow z="1">
-        <div class="subhead cardSection cardTitle">Trending</div>
       </paper-shadow>
     </div>
 
