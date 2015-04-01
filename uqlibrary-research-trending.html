@@ -15,7 +15,7 @@
                 <div horizontal layout center>
                     <div class="new-title" flex>{{pub.title}}</div>
                     <div class="num-cites border-left" self-stretch>{{pub.count}}</div>
-                    <div class="num-cites border-left" self-stretch>+{{pub.difference}}</div>
+                    <div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>
                     </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
@@ -61,7 +61,6 @@
 
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
-          console.log(that.publications);
         });
       },
 
@@ -69,6 +68,15 @@
 
         if(this.user.hasOwnProperty('id')) {
           this.$.api.get({'username' : this.user.id});
+        }
+      },
+
+      numberFormat: function(value) {
+        var _value = parseFloat(value);
+        if (Math.round(_value) == _value) {
+          return value;
+        } else {
+          return _value.toFixed(1);
         }
       }
 
