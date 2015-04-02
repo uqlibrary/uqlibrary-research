@@ -17,7 +17,7 @@
                     <div vertical layout>
                       <div horizontal layout>
                         <div flex class="authors">{{pub.authors}}</div>
-                        <div  class="year">{{pub.created | showYear}}</div>
+                        <div  class="year">{{pub.rek_date | showYear}}</div>
                       </div>
                       <div>{{pub.title}}</div>
                     </div>
@@ -100,7 +100,7 @@
       },
 
       showYear: function(value) {
-        var date =  moment.unix(value);// moment(value);
+        var date = moment(value);
         if(date.isValid()) {
           return date.format('YYYY');
         }
