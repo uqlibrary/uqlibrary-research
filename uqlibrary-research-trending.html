@@ -23,9 +23,8 @@
                     </div>
                   </div>
                     <div class="num-cites border-left" self-stretch>
-                      {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">+{{pub.difference | numberFormat}}</span>
+                      {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
                     </div>
-                    <!--<div class="num-cites border-left" self-stretch>+{{pub.difference | numberFormat}}</div>-->
                  </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
@@ -93,8 +92,15 @@
         }
       },
 
-      numberFormat: function(value) {
-        return parseFloat(value).toFixed(0);
+      differenceFormat: function(value) {
+        var _value = parseFloat(value).toFixed(0);
+        if(_value == 0)
+          return '';
+
+        if(_value > 0)
+          return '+'+_value;
+
+        return _value;
       },
 
       showYear: function(value) {
