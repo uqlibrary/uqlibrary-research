@@ -2,6 +2,7 @@
 
 <polymer-element name="uqlibrary-research-metrics" layout center>
   <template>
+    <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
 
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
@@ -19,7 +20,7 @@
           <div flex vertical layout center-justified class="type-cites-header">Web of Science</div>
 
           <div center-justified class="border-left">
-            <div class="num-cites">23</div>
+            <div class="num-cites">{{hindex.hindex_incites}}</div>
             <div class="type-cites">h-index</div>
           </div>
 
@@ -40,7 +41,7 @@
           <div flex vertical layout center-justified class="type-cites-header">Scopus</div>
 
           <div center-justified class="border-left">
-            <div class="num-cites">23</div>
+            <div class="num-cites">{{hindex.hindex_scopus}}</div>
             <div class="type-cites">h-index</div>
           </div>
 
@@ -94,6 +95,14 @@
 
       ready: function() {
         var that = this;
+
+          console.log(this.$.api);
+
+        this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function(e) {
+          that.hindex = e.detail;
+        });
+
+        this.$.api.get({ username: 's1234567' });
       }
 
     });
