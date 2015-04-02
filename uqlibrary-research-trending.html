@@ -11,7 +11,6 @@
         <div class="subhead cardSection cardTitle">{{card.title}} </div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
-
                 <div horizontal layout center class="hoverable">
                   <div class="new-title" flex>
                     <div vertical layout>
@@ -33,22 +32,21 @@
 
       </template>
 
-      <div class="card">
-        <paper-shadow z="1">
-          <div class="subhead cardSection cardTitle">Research guides</div>
+      <paper-shadow z="1" class="card">
+        <div class="subhead cardSection cardTitle">Research guides</div>
 
-          <div class="cardSection">
-            <a href="http://guides.library.uq.edu.au/getting-published">
-              <core-icon class="link" icon="description" aria-label=""></core-icon>Guide to Getting Published
-            </a>
-          </div>
-          <div class="cardSection">
-            <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-              <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>See all research support
-            </a>
-          </div>
-        </paper-shadow>
-      </div>
+        <div class="cardSection">
+          <a href="http://guides.library.uq.edu.au/getting-published">
+            <core-icon class="link" icon="description" aria-label=""></core-icon>Guide to Getting Published
+          </a>
+        </div>
+        <div class="cardSection">
+          <a href="https://www.library.uq.edu.au/research-support" target="_blank">
+            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>See all research support
+          </a>
+        </div>
+      </paper-shadow>
+
     </div>
 
   </template>
@@ -82,6 +80,7 @@
 
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
+          this.fire('uqlibrary-research-trending-loaded');
         });
       },
 
