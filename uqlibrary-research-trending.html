@@ -14,11 +14,13 @@
                 <div horizontal layout center class="hoverable">
                   <div class="new-title" flex>
                     <div vertical layout>
+                        <a href="{{'https://espace.library.uq.edu.au/view/' + pub.rek_pid}}">
                       <div horizontal layout>
                         <div flex class="authors">{{pub.authors}}</div>
                         <div  class="year">{{pub.rek_date | showYear}}</div>
                       </div>
                       <div>{{pub.title}}</div>
+                        </a>
                     </div>
                   </div>
                     <div class="num-cites border-left {{card.type}}" self-stretch>
