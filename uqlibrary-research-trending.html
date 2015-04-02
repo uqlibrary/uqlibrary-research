@@ -8,7 +8,7 @@
     <div id="cards" vertical center-justified layout>
       <template repeat="{{card in cards}}">
         <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
-        <div class="subhead cardSection cardTitle">{{card.title}} </div>
+        <div class="subhead cardSection cardTitle">{{card.title}}</div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
                 <div horizontal layout center class="hoverable">
@@ -21,7 +21,7 @@
                       <div>{{pub.title}}</div>
                     </div>
                   </div>
-                    <div class="num-cites border-left" self-stretch>
+                    <div class="num-cites border-left {{card.type}}" self-stretch>
                       {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
                     </div>
                  </div>
