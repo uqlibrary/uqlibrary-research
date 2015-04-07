@@ -16,7 +16,7 @@
                     <div vertical layout>
                         <a href="{{'https://espace.library.uq.edu.au/view/' + pub.rek_pid}}">
                       <div horizontal layout>
-                        <div flex class="authors">{{pub.authors}}</div>
+                        <div flex class="authors">{{pub.authors | formatAuthors}}</div>
                         <div  class="year">{{pub.rek_date | showYear}}</div>
                       </div>
                       <div>{{pub.title}}</div>
@@ -110,6 +110,10 @@
           return date.format('YYYY');
         }
         return value;
+      },
+
+      formatAuthors: function (value) {
+        return value.replace(';', ', ');
       }
 
 
