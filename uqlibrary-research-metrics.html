@@ -1,108 +1,114 @@
 <link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
 
 <polymer-element name="uqlibrary-research-metrics" layout center>
-  <template>
-    <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
+    <template>
+        <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
 
-    <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
+        <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
-    <div class="card">
-      <paper-shadow z="1">
-        <div class="subhead cardSection cardTitle">My metrics</div>
+        <div class="card">
+            <paper-shadow z="1">
+                <div class="subhead cardSection cardTitle">My metrics</div>
 
-        <div class="text-center text-container hoverable">
-          <span class="espace">105</span>
-          <span class="metric-text">eSpace Publications</span>
+                <div class="text-center text-container hoverable">
+                    <span class="espace">105</span>
+                    <span class="metric-text">eSpace Publications</span>
+                </div>
+
+                <div horizontal layout class="border-top centre" id="wos-stats">
+
+                    <div flex vertical layout center-justified class="type-cites-header hoverable">Web of Science</div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">{{hindex.hindex_incites}}</div>
+                        <div class="type-cites">h-index</div>
+                    </div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">23</div>
+                        <div class="type-cites">Papers</div>
+                    </div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">23</div>
+                        <div class="type-cites">Citations</div>
+                    </div>
+
+                </div>
+
+                <div horizontal layout class="border-top centre" id="scopus-stats">
+
+                    <div flex vertical layout center-justified class="type-cites-header hoverable">Scopus</div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">{{hindex.hindex_scopus}}</div>
+                        <div class="type-cites">h-index</div>
+                    </div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">23</div>
+                        <div class="type-cites">Papers</div>
+                    </div>
+
+                    <div center-justified class="border-left">
+                        <div class="metrics-cites">23</div>
+                        <div class="type-cites">Citations</div>
+                    </div>
+
+                </div>
+
+            </paper-shadow>
         </div>
 
-        <div horizontal layout class="border-top centre">
+        <div class="card">
+            <paper-shadow z="1">
+                <div class="subhead cardSection cardTitle">Research guides</div>
 
-          <div flex vertical layout center-justified class="type-cites-header hoverable">Web of Science</div>
-
-          <div center-justified class="border-left">
-            <div class="num-cites">{{hindex.hindex_incites}}</div>
-            <div class="type-cites">h-index</div>
-          </div>
-
-          <div center-justified class="border-left">
-            <div class="metrics-cites">23</div>
-            <div class="type-cites">Papers</div>
-          </div>
-
-          <div center-justified class="border-left">
-            <div class="metrics-cites">23</div>
-            <div class="type-cites">Citations</div>
-          </div>
-
+                <div class="cardSection">
+                    <a href="http://guides.library.uq.edu.au/research_impact/author-identifiers">
+                        <core-icon class="link" icon="assignment-ind" aria-label=""></core-icon>
+                        Guide to Author Identifiers
+                    </a>
+                </div>
+                <div class="cardSection">
+                    <a href="http://guides.library.uq.edu.au/research_impact" target="_blank">
+                        <core-icon class="link" icon="trending-up" aria-label=""></core-icon>
+                        Guide to Research Output & Impact
+                    </a>
+                </div>
+                <div class="cardSection">
+                    <a href="https://www.library.uq.edu.au/research-support" target="_blank">
+                        <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>
+                        See all research support
+                    </a>
+                </div>
+            </paper-shadow>
         </div>
 
-        <div horizontal layout class="border-top centre">
+    </template>
 
-          <div flex vertical layout center-justified class="type-cites-header hoverable">Scopus</div>
+    <script>
+        Polymer('uqlibrary-research-metrics', {
 
-          <div center-justified class="border-left">
-            <div class="num-cites">{{hindex.hindex_scopus}}</div>
-            <div class="type-cites">h-index</div>
-          </div>
+            created: function () {
+            },
 
-          <div center-justified class="border-left">
-            <div class="metrics-cites">23</div>
-            <div class="type-cites">Papers</div>
-          </div>
+            userChanged: function (newValue) {
 
-          <div center-justified class="border-left">
-            <div class="metrics-cites">23</div>
-            <div class="type-cites">Citations</div>
-          </div>
+                if (this.user.hasOwnProperty('id')) {
+                    this.$.api.get({username: this.user.id});
+                }
+            },
 
-        </div>
+            ready: function () {
+                var that = this;
 
-      </paper-shadow>
-    </div>
+                this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
+                    that.hindex = e.detail;
+                });
+            }
 
-    <div class="card">
-      <paper-shadow z="1">
-        <div class="subhead cardSection cardTitle">Research guides</div>
-
-        <div class="cardSection">
-          <a href="http://guides.library.uq.edu.au/research_impact/author-identifiers">
-            <core-icon class="link" icon="assignment-ind" aria-label=""></core-icon>Guide to Author Identifiers
-          </a>
-        </div>
-        <div class="cardSection">
-          <a href="http://guides.library.uq.edu.au/research_impact" target="_blank">
-            <core-icon class="link" icon="trending-up" aria-label=""></core-icon>Guide to Research Output & Impact
-          </a>
-        </div>
-        <div class="cardSection">
-          <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>See all research support
-          </a>
-        </div>
-      </paper-shadow>
-    </div>
-
-  </template>
-
-  <script>
-    Polymer('uqlibrary-research-metrics', {
-
-      created: function() {
-      },
-
-      ready: function() {
-        var that = this;
-
-          console.log(this.$.api);
-
-        this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function(e) {
-          that.hindex = e.detail;
         });
-
-        this.$.api.get({ username: 's1234567' });
-      }
-
-    });
-  </script>
+    </script>
 
 </polymer-element>
