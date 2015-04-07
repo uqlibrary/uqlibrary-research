@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title>uqlibrary-timeline</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../uqlibrary-research-metrics.html">
+</head>
+<body>
+<uqlibrary-api-account id="account" autoload="true"></uqlibrary-api-account>
+<uqlibrary-research-metrics></uqlibrary-research-metrics>
+
+<script>
+  window.addEventListener('polymer-ready', function () {
+
+    var parent = document.querySelector('uqlibrary-research-metrics');
+    var account = document.querySelector('uqlibrary-api-account');
+    var user = null;
+
+    parent.$.api.$.list.useMockData = true;
+    account.$.account.useMockData = true;
+
+    describe('uqlibrary-research-metrics application functional tests', function () {
+
+      before(function () {
+      });
+
+      beforeEach(function () {
+      });
+
+      afterEach(function () {
+      });
+
+      it('should load and display data from api', function (done) {
+        //TODO: write tests when api is ready
+        done();
+      });
+
+      it('should display load user from api and update the hindex', function (done) {
+        expect(account).not.to.be.null;
+        expect(parent).not.to.be.null;
+
+        account.addEventListener('uqlibrary-api-account-loaded', function (e) {
+          setTimeout(function () {
+            parent.user = e.detail;
+          }, 500);
+        });
+
+        parent.addEventListener('uqlibrary-api-academic-hindex-loaded', function () {
+          setTimeout(function () {
+            // grab the first card
+            var scopusHIndexCont = parent.shadowRoot.querySelector('#scopus-stats div.metrics-cites');
+            var wosHIndexCont = parent.shadowRoot.querySelector('#wos-stats div.metrics-cites');
+
+            expect(scopusHIndexCont).not.to.be.null;
+            expect(scopusHIndexCont.textContent).to.equal('22');
+
+            expect(wosHIndexCont).not.to.be.null;
+            expect(wosHIndexCont.textContent).to.equal('23');
+
+            done();
+
+          }, 2000);
+
+        });
+
+        account.get();
+
+      });
+
+    });
+  });
+</script>
+
+</body>
+</html>

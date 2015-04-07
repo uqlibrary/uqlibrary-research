@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title>uqlibrary-timeline</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../uqlibrary-research-metrics.html">
+</head>
+<body>
+
+<uqlibrary-research-metrics></uqlibrary-research-metrics>
+
+<script>
+  window.addEventListener('polymer-ready', function() {
+    var parent = document.querySelector('uqlibrary-research-metrics');
+    var hindex = {
+      "hindex_scopus": 22,
+      "hindex_incites": 23
+    };
+
+    describe('uqlibrary-research application unit tests', function () {
+      before(function () {
+      });
+
+      beforeEach(function () {
+      });
+
+      afterEach(function () {
+      });
+
+      it('should display the hindex', function(done) {
+        expect(parent).not.to.be.null;
+        parent.hindex = hindex;
+
+        setTimeout(function() {
+          var scopusHIndexCont = parent.shadowRoot.querySelector('#scopus-stats div.metrics-cites');
+          var wosHIndexCont = parent.shadowRoot.querySelector('#wos-stats div.metrics-cites');
+
+          expect(scopusHIndexCont).not.to.be.null;
+          expect(scopusHIndexCont.textContent).to.equal('22');
+
+          expect(wosHIndexCont).not.to.be.null;
+          expect(wosHIndexCont.textContent).to.equal('23');
+
+          done();
+
+        }, 100);
+      });
+
+    });
+
+  });
+</script>
+
+</body>
+</html>
