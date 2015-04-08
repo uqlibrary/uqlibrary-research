@@ -1,6 +1,6 @@
 <link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
 
-<polymer-element name="uqlibrary-research-metrics" layout center>
+<polymer-element name="uqlibrary-research-metrics" layout center attributes="user">
   <template>
     <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
     <uqlibrary-api-academic-stats id="apiStats"></uqlibrary-api-academic-stats>
@@ -24,12 +24,12 @@
           </div>
 
           <div center-justified class="border-left papers">
-            <div class="metrics-cites">{{stats.thomson_citation_count_i.count}}</div>
+            <div class="metrics-cites">{{stats.thomson_citation_count_i.count | zeroIfNone}}</div>
             <div class="type-cites">Papers</div>
           </div>
 
           <div center-justified class="border-left citations">
-            <div class="metrics-cites">{{stats.thomson_citation_count_i.sum}}</div>
+            <div class="metrics-cites">{{stats.thomson_citation_count_i.sum | zeroIfNone}}</div>
             <div class="type-cites">Citations</div>
           </div>
 
@@ -43,12 +43,12 @@
           </div>
 
           <div center-justified class="border-left papers">
-            <div class="metrics-cites">{{stats.scopus_citation_count_i.count}}</div>
+            <div class="metrics-cites">{{stats.scopus_citation_count_i.count | zeroIfNone}}</div>
             <div class="type-cites">Papers</div>
           </div>
 
           <div center-justified class="border-left citations">
-            <div class="metrics-cites">{{stats.scopus_citation_count_i.sum}}</div>
+            <div class="metrics-cites">{{stats.scopus_citation_count_i.sum | zeroIfNone}}</div>
             <div class="type-cites">Citations</div>
           </div>
 
@@ -86,12 +86,12 @@
 
   <script>
     Polymer('uqlibrary-research-metrics', {
+      user: {},
 
       created: function () {
       },
 
       userChanged: function (newValue) {
-
         if (this.user.hasOwnProperty('id')) {
           this.$.api.get({username: this.user.id});
           this.$.apiStats.get({username: this.user.id});
