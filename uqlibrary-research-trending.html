@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
     <div id="cards" vertical center-justified layout>
+
+        <paper-shadow z="1" class="card" hidden?="{{((publications.altmetric.length + publications.thomson.length + publications.scopus.length) > 0)}}">
+            <div class="cardSection">
+                   It looks like we can't find any publications about you that are trending at the moment.
+            </div>
+            <div class="cardSection caption">
+                Your publications will appear here when someone else references or cites your publication.
+                Your total score or citation count and the amount it's changed in the past month will be displayed.
+            </div>
+        </paper-shadow>
+
       <template repeat="{{card in cards}}">
+        <!--<template repeat="0">-->
         <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
         <div class="subhead cardSection cardTitle">{{card.title}}</div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
@@ -82,6 +94,8 @@
 
       ready: function() {
         var that = this;
+
+
 
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
