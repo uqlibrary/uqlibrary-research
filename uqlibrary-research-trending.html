@@ -121,6 +121,18 @@
         return _value;
       },
 
+      differenceFormat: function(value) {
+        var _value = parseFloat(value).toFixed(0);
+        if(_value == 0)
+          return '';
+
+        if(_value > 0)
+          return '+'+_value;
+
+        return _value;
+      },
+
+
       showYear: function(value) {
         var date = moment(value);
         if(date.isValid()) {
