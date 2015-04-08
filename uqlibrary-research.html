@@ -51,7 +51,7 @@ Element providing an overview for student's courses
               </div>
             </paper-tab>
 
-            <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
+            <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics" hidden>
               <div class="menu">
                 <uqlibrary-a11y-link>
                   <div class="tabTitle" layout vertical center>Metrics</div>
@@ -87,7 +87,7 @@ Element providing an overview for student's courses
               <uqlibrary-research-trending user="{{user}}"></uqlibrary-research-trending>
             </section>
 
-            <section id="sectionMetrics" name="Metrics">
+            <section id="sectionMetrics" name="Metrics" hidden>
               <uqlibrary-research-metrics user="{{user}}"></uqlibrary-research-metrics>
             </section>
 
