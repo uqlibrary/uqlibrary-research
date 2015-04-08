@@ -18,10 +18,8 @@
 
         <div horizontal layout class="border-top centre" id="wos-stats">
 
-          <div flex vertical layout center-justified class="type-cites-header hoverable">Web of Science</div>
-
-          <div center-justified class="border-left">
-            <div class="metrics-cites">{{hindex.hindex_incites}}</div>
+          <div center-justified class="border-left type-cites">
+            <div class="metrics-cites">{{hindex.hindex_incites | zeroIfNone}}</div>
             <div class="type-cites">h-index</div>
           </div>
 
@@ -39,10 +37,8 @@
 
         <div horizontal layout class="border-top centre" id="scopus-stats">
 
-          <div flex vertical layout center-justified class="type-cites-header hoverable">Scopus</div>
-
-          <div center-justified class="border-left">
-            <div class="metrics-cites">{{hindex.hindex_scopus}}</div>
+          <div center-justified class="border-left type-cites">
+            <div class="metrics-cites">{{hindex.hindex_scopus | zeroIfNone}}</div>
             <div class="type-cites">h-index</div>
           </div>
 
@@ -107,19 +103,20 @@
 
         this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
           that.hindex = e.detail;
-
-          if (!that.hindex.hasOwnProperty('hindex_scopus')) {
-            that.hindex.hindex_scopus = 0;
-          }
-
-          if (!that.hindex.hasOwnProperty('hindex_incites')) {
-            that.hindex.hindex_incites = 0;
-          }
         });
 
         this.$.apiStats.addEventListener('uqlibrary-api-academic-stats-loaded', function (e) {
           that.stats = e.detail.stats.stats_fields;
         });
+      },
+
+      zeroIfNone: function (value) {
+        if (value == null) {
+          return 0;
+        }
+        else {
+          return value;
+        }
       }
 
     });

@@ -6,7 +6,19 @@
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
     <div id="cards" vertical center-justified layout>
+
+        <paper-shadow z="1" class="card" hidden?="{{((publications.altmetric.length + publications.thomson.length + publications.scopus.length) > 0)}}">
+            <div class="cardSection">
+                   It looks like we can't find any publications about you that are trending at the moment.
+            </div>
+            <div class="cardSection caption">
+                Your publications will appear here when someone else references or cites them.
+                Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus & WoS) will be displayed.
+            </div>
+        </paper-shadow>
+
       <template repeat="{{card in cards}}">
+        <!--<template repeat="0">-->
         <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
         <div class="subhead cardSection cardTitle">{{card.title}}</div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
@@ -14,18 +26,21 @@
                 <div horizontal layout center class="hoverable">
                   <div class="new-title" flex>
                     <div vertical layout>
-                        <a href="{{'https://espace.library.uq.edu.au/view/' + pub.rek_pid}}">
+                        <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}">
                       <div horizontal layout>
-                        <div flex class="authors">{{pub.authors | formatAuthors}}</div>
-                        <div  class="year">{{pub.rek_date | showYear}}</div>
+                        <div flex class="trending-title">{{pub.title}}</div>
                       </div>
-                      <div>{{pub.title}}</div>
+                      <div class="authors caption">{{pub.authors | formatAuthors}}, {{pub.rek_date | showYear}}</div>
                         </a>
                     </div>
                   </div>
-                    <div class="num-cites border-left {{card.type}}" self-stretch>
-                      {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
-                    </div>
+                  <div class="num-cites border-left" self-stretch>
+                    <a href="{{pub.citation_url}}">
+                      <div class="{{card.type}}">
+                        {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
+                      </div>
+                    </a>
+                  </div>
                  </div>
                 </div>
                 <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
@@ -80,6 +95,8 @@
       ready: function() {
         var that = this;
 
+
+
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
           this.fire('uqlibrary-research-trending-loaded');
@@ -93,6 +110,17 @@
         }
       },
 
+      zeroIfNone: function(value) {
+        var _value = parseFloat(value).toFixed(0);
+        if(_value == 0)
+          return '';
+
+        if(_value > 0)
+          return '+'+_value;
+
+        return _value;
+      },
+
       differenceFormat: function(value) {
         var _value = parseFloat(value).toFixed(0);
         if(_value == 0)
@@ -104,6 +132,7 @@
         return _value;
       },
 
+
       showYear: function(value) {
         var date = moment(value);
         if(date.isValid()) {
@@ -113,7 +142,7 @@
       },
 
       formatAuthors: function (value) {
-        return value.replace(';', ', ');
+        return value.replace(/;/g, ', ');
       }
 
 
