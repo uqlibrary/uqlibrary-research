@@ -20,7 +20,7 @@
                     <div flex vertical layout center-justified class="type-cites-header hoverable">Web of Science</div>
 
                     <div center-justified class="border-left type-cites">
-                        <div class="metrics-cites">{{hindex.hindex_incites}}</div>
+                        <div class="metrics-cites">{{hindex.hindex_scopus | zeroIfNone}}</div>
                         <div class="type-cites">h-index</div>
                     </div>
 
@@ -41,7 +41,7 @@
                     <div flex vertical layout center-justified class="type-cites-header hoverable">Scopus</div>
 
                     <div center-justified class="border-left type-cites">
-                        <div class="metrics-cites">{{hindex.hindex_scopus}}</div>
+                        <div class="metrics-cites">{{hindex.hindex_scopus | zeroIfNone}}</div>
                         <div class="type-cites">h-index</div>
                     </div>
 
@@ -106,6 +106,14 @@
                 this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
                     that.hindex = e.detail;
                 });
+            },
+
+            zeroIfNone: function(value) {
+                if (value == null) {
+                    return 0;
+                } else {
+                    return value;
+                }
             }
 
         });
