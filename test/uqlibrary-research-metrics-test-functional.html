@@ -41,63 +41,58 @@
       afterEach(function () {
       });
 
+      after(function () {
+      });
+
       it('should load user from api and update the hindex', function (done) {
         expect(account).not.to.be.null;
         expect(parent).not.to.be.null;
 
-        parent.addEventListener('uqlibrary-api-academic-hindex-loaded', function () {
-          setTimeout(function () {
-            // grab the first card
-            var scopusHIndexCont = parent.shadowRoot.querySelector('#scopus-stats div.metrics-cites');
-            var wosHIndexCont = parent.shadowRoot.querySelector('#wos-stats div.metrics-cites');
+        setTimeout(function () {
+          // grab the first card
+          var scopusHIndexCont = parent.shadowRoot.querySelector('#scopus-stats div.metrics-cites');
+          var wosHIndexCont = parent.shadowRoot.querySelector('#wos-stats div.metrics-cites');
 
-            expect(scopusHIndexCont).not.to.be.null;
-            expect(scopusHIndexCont.textContent).to.equal('22');
+          expect(scopusHIndexCont).not.to.be.null;
+          expect(scopusHIndexCont.textContent).to.equal('22');
 
-            expect(wosHIndexCont).not.to.be.null;
-            expect(wosHIndexCont.textContent).to.equal('23');
+          expect(wosHIndexCont).not.to.be.null;
+          expect(wosHIndexCont.textContent).to.equal('23');
 
-            done();
+          done();
+        }, 1000);
 
-          }, 2000);
-
-        });
 
         account.get();
-
       });
 
       it('should load user from api and update the stats', function (done) {
         expect(account).not.to.be.null;
         expect(parent).not.to.be.null;
 
-        parent.addEventListener('uqlibrary-api-academic-stats-loaded', function () {
-          setTimeout(function () {
-            // grab the first card
-            var scopusCountCont = parent.shadowRoot.querySelector('#scopus-stats div.papers div.metrics-cites');
-            var scopusCitCont = parent.shadowRoot.querySelector('#scopus-stats div.citations div.metrics-cites');
-            var wosCountCont = parent.shadowRoot.querySelector('#wos-stats div.papers div.metrics-cites');
-            var wosCitCont = parent.shadowRoot.querySelector('#wos-stats div.citations div.metrics-cites');
-            var countCont = parent.shadowRoot.querySelector('#publications');
+        setTimeout(function () {
+          // grab the first card
+          var scopusCountCont = parent.shadowRoot.querySelector('#scopus-stats div.papers div.metrics-cites');
+          var scopusCitCont = parent.shadowRoot.querySelector('#scopus-stats div.citations div.metrics-cites');
+          var wosCountCont = parent.shadowRoot.querySelector('#wos-stats div.papers div.metrics-cites');
+          var wosCitCont = parent.shadowRoot.querySelector('#wos-stats div.citations div.metrics-cites');
+          var countCont = parent.shadowRoot.querySelector('#publications');
 
-            expect(scopusCountCont).not.to.be.null;
-            expect(scopusCountCont.textContent).to.equal('159');
-            expect(scopusCitCont).not.to.be.null;
-            expect(scopusCitCont.textContent).to.equal('6897');
+          expect(scopusCountCont).not.to.be.null;
+          expect(scopusCountCont.textContent).to.equal('159');
+          expect(scopusCitCont).not.to.be.null;
+          expect(scopusCitCont.textContent).to.equal('6897');
 
-            expect(wosCountCont).not.to.be.null;
-            expect(wosCountCont.textContent).to.equal('157');
-            expect(wosCitCont).not.to.be.null;
-            expect(wosCitCont.textContent).to.equal('6736');
+          expect(wosCountCont).not.to.be.null;
+          expect(wosCountCont.textContent).to.equal('157');
+          expect(wosCitCont).not.to.be.null;
+          expect(wosCitCont.textContent).to.equal('6736');
 
-            expect(countCont).not.to.be.null;
-            expect(countCont.textContent).to.equal('173');
+          expect(countCont).not.to.be.null;
+          expect(countCont.textContent).to.equal('173');
 
-            done();
-
-          }, 2000);
-
-        });
+          done();
+        }, 2000);
 
         account.get();
 
