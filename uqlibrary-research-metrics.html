@@ -27,7 +27,7 @@
 
           <a href="https://espace.library.uq.edu.au/{{user.id}}" target="_blank">
             <div class="text-center text-container hoverable">
-                <span class="espace" id="publications">{{stats.id.count}}</span><span class="metric-text">eSpace Publications</span>
+                <span class="espace" id="publications">{{stats.id.count | zeroIfNone}}</span><span class="metric-text">eSpace Publications</span>
             </div>
           </a>
 
