@@ -10,7 +10,7 @@
       <paper-shadow z="1" class="card"
                     hidden?="{{((stats.id.count + hindex.hindex_incites + stats.thomson_citation_count_i.count + stats.thomson_citation_count_i.sum + hindex.hindex_scopus + stats.scopus_citation_count_i.count + stats.scopus_citation_count_i.sum) > 0)}}">
           <div class="cardSection">
-              It looks like your publication metrics aren't entered yet.
+              It looks like we don't have any publications that have any recorded citation counts yet.
           </div>
           <div class="cardSection caption">
               Your publications will appear here when someone else references or cites them.
@@ -25,10 +25,11 @@
       <paper-shadow z="1">
         <div class="subhead cardSection cardTitle">My metrics</div>
 
-        <div class="text-center text-container hoverable">
-          <span class="espace" id="publications">{{stats.id.count}}</span>
-          <span class="metric-text">eSpace Publications</span>
-        </div>
+          <a href="{{'https://espace.library.uq.edu.au/' + user.id}}">
+            <div class="text-center text-container hoverable">
+                <span class="espace" id="publications">{{stats.id.count}}</span><span class="metric-text">eSpace Publications</span>
+            </div>
+          </a>
 
         <div horizontal layout class="border-top centre" id="wos-stats">
 
@@ -123,13 +124,14 @@
 
         this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
           that.hindex = e.detail;
-            console.log('that hindex = ' + that.hindex.hindex_incites);
+//            console.log('that hindex = ' + that.hindex.hindex_incites);
         });
 
         this.$.apiStats.addEventListener('uqlibrary-api-academic-stats-loaded', function (e) {
           that.stats = e.detail.stats.stats_fields;
-//            var total = that.stats.id.count + that.hindex.hindex_incites + that.stats.thomson_citation_count_i.count + that.stats.thomson_citation_count_i.sum + that.hindex.hindex_scopus + that.stats.scopus_citation_count_i.count + that.stats.scopus_citation_count_i.sum;
-//            console.log(total);
+            console.log(that.stats.id.count);
+            var total = that.stats.id.count + that.hindex.hindex_incites + that.stats.thomson_citation_count_i.count + that.stats.thomson_citation_count_i.sum + that.hindex.hindex_scopus + that.stats.scopus_citation_count_i.count + that.stats.scopus_citation_count_i.sum;
+            console.log(total);
 //            if (total != 0) {
 //                hasData = true;
 //            }

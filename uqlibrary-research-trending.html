@@ -24,16 +24,36 @@
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
                 <div horizontal layout center class="hoverable">
-                  <div class="new-title" flex>
+
+                    <!--<li class="list-item border" role="link" data-title="{{model.name}}" data-code="{{model.code}}" on-tap="{{itemTapHandler}}">-->
+                        <!--<div class="content" layout horizontal>-->
+                            <!--<div flex>-->
+                                <!--<div class="line1">-->
+                                    <!--<a id="library-{{model.code}}" target="_blank" href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}" title="{{model.name}}">-->
+                                        <!--<paper-ripple fit></paper-ripple>-->
+                                        <!--{{pub.title}}-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                                <!--<div class="text">-->
+                                    <!--<span class="body1">{{pub.authors | formatAuthors}}, </span>-->
+                                    <!--<span hidden?={{!model.notes}}>{{pub.rek_date | showYear}}</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+
+                    <div class="new-title" flex>
                     <div vertical layout>
                         <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}">
                       <div horizontal layout>
-                        <div flex class="trending-title">{{pub.title}}</div>
+                        <div flex class="line1">{{pub.title}}</div>
                       </div>
-                      <div class="authors caption">{{pub.authors | formatAuthors}}, {{pub.rek_date | showYear}}</div>
+                      <div class="authors caption"><span class="body1">{{pub.authors | formatAuthors}}</span> &mdash; {{pub.rek_date | showYear}}</div>
                         </a>
                     </div>
                   </div>
+
+
                   <div class="num-cites border-left" self-stretch>
                     <a href="{{pub.citation_url}}">
                       <div class="{{card.type}}">
