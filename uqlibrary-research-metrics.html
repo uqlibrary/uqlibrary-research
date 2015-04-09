@@ -7,7 +7,21 @@
 
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
+      <paper-shadow z="1" class="card"
+                    hidden?="{{((stats.id.count + hindex.hindex_incites + stats.thomson_citation_count_i.count + stats.thomson_citation_count_i.sum + hindex.hindex_scopus + stats.scopus_citation_count_i.count + stats.scopus_citation_count_i.sum) > 0)}}">
+          <div class="cardSection">
+              It looks like your publication metrics aren't entered yet.
+          </div>
+          <div class="cardSection caption">
+              Your publications will appear here when someone else references or cites them.
+              Your total score or citation count and the amount it's changed in the past year (Altmetrics) or month (Scopus & WoS) will be displayed.
+          </div>
+      </paper-shadow>
+
     <div class="card">
+
+
+
       <paper-shadow z="1">
         <div class="subhead cardSection cardTitle">My metrics</div>
 
@@ -17,6 +31,10 @@
         </div>
 
         <div horizontal layout class="border-top centre" id="wos-stats">
+
+            <div horizontal layout center flex class="metrics-type hoverable">
+                Web of Science
+            </div>
 
           <div center-justified class="border-left type-cites">
             <div class="metrics-cites">{{hindex.hindex_incites | zeroIfNone}}</div>
@@ -36,6 +54,10 @@
         </div>
 
         <div horizontal layout class="border-top centre" id="scopus-stats">
+
+            <div horizontal layout center flex class="metrics-type  hoverable">
+                Scopus
+            </div>
 
           <div center-justified class="border-left type-cites">
             <div class="metrics-cites">{{hindex.hindex_scopus | zeroIfNone}}</div>
@@ -63,20 +85,17 @@
 
         <div class="cardSection">
           <a href="http://guides.library.uq.edu.au/research_impact/author-identifiers">
-            <core-icon class="link" icon="assignment-ind" aria-label=""></core-icon>
-            Guide to Author Identifiers
+            <core-icon class="link" icon="assignment-ind" aria-label=""></core-icon>Guide to Author Identifiers
           </a>
         </div>
         <div class="cardSection">
           <a href="http://guides.library.uq.edu.au/research_impact" target="_blank">
-            <core-icon class="link" icon="trending-up" aria-label=""></core-icon>
-            Guide to Research Output & Impact
+            <core-icon class="link" icon="trending-up" aria-label=""></core-icon>Guide to Research Output & Impact
           </a>
         </div>
         <div class="cardSection">
           <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>
-            See all research support
+            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>See all research support
           </a>
         </div>
       </paper-shadow>
@@ -100,13 +119,20 @@
 
       ready: function () {
         var that = this;
+          var hasData = false;
 
         this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
           that.hindex = e.detail;
+            console.log('that hindex = ' + that.hindex.hindex_incites);
         });
 
         this.$.apiStats.addEventListener('uqlibrary-api-academic-stats-loaded', function (e) {
           that.stats = e.detail.stats.stats_fields;
+//            var total = that.stats.id.count + that.hindex.hindex_incites + that.stats.thomson_citation_count_i.count + that.stats.thomson_citation_count_i.sum + that.hindex.hindex_scopus + that.stats.scopus_citation_count_i.count + that.stats.scopus_citation_count_i.sum;
+//            console.log(total);
+//            if (total != 0) {
+//                hasData = true;
+//            }
         });
       },
 
