@@ -44,7 +44,7 @@
 
                     <div class="new-title" flex>
                     <div vertical layout>
-                        <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}">
+                        <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}" target="_blank">
                       <div horizontal layout>
                         <div flex class="line1">{{pub.title}}</div>
                       </div>
@@ -55,7 +55,7 @@
 
 
                   <div class="num-cites border-left" self-stretch>
-                    <a href="{{pub.citation_url}}">
+                    <a href="{{pub.citation_url}}" target="_blank">
                       <div class="{{card.type}}">
                         {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
                       </div>
