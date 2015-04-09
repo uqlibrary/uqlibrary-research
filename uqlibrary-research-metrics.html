@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
       <paper-shadow z="1" class="card"
-                    hidden?="{{((stats.id.count + hindex.hindex_incites + stats.thomson_citation_count_i.count + stats.thomson_citation_count_i.sum + hindex.hindex_scopus + stats.scopus_citation_count_i.count + stats.scopus_citation_count_i.sum) > 0)}}">
+                    hidden?="{{(stats.id.count || hindex.hindex_incites || stats.thomson_citation_count_i.count || stats.thomson_citation_count_i.sum || hindex.hindex_scopus || stats.scopus_citation_count_i.count || stats.scopus_citation_count_i.sum)}}">
           <div class="cardSection">
               It looks like we don't have any publications that have any recorded citation counts yet.
           </div>
