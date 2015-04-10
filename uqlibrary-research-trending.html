@@ -7,7 +7,7 @@
 
     <div id="cards" vertical center-justified layout>
 
-        <paper-shadow z="1" class="card" hidden?="{{((publications.altmetric.length + publications.thomson.length + publications.scopus.length) > 0)}}">
+        <paper-shadow z="1" class="card" hidden?="{{isNoResultsMessageHidden}}">
             <div class="cardSection">
                    It looks like we can't find any of your publications that are trending at the moment.
             </div>
@@ -114,9 +114,6 @@
 
       ready: function() {
         var that = this;
-
-
-
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
           this.fire('uqlibrary-research-trending-loaded');
@@ -163,6 +160,16 @@
 
       formatAuthors: function (value) {
         return value.replace(/;/g, ', ');
+      },
+
+      isNoResultsMessageHidden: function () {
+        return (!this.publications.hasOwnProperty('altmetic')
+                && !this.publications.hasOwnProperty('thomson')
+                && !this.publications.hasOwnProperty('scopus')
+                && publications.altmetric.length == 0
+                && publications.thomson.length == 0
+                && publications.scopus.length == 0);
+
       }
 
 
