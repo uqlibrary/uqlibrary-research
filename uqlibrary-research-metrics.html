@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
       <paper-shadow z="1" class="card"
-                    hidden?="{{(stats.id.count || hindex.hindex_incites || stats.thomson_citation_count_i.count || stats.thomson_citation_count_i.sum || hindex.hindex_scopus || stats.scopus_citation_count_i.count || stats.scopus_citation_count_i.sum)}}">
+                    hidden?="{{ hasHindexData || hasStatsData}}">
           <div class="cardSection">
               It looks like we don't have any publications that have any recorded citation counts yet.
           </div>
@@ -120,21 +120,15 @@
 
       ready: function () {
         var that = this;
-          var hasData = false;
-
         this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
           that.hindex = e.detail;
-//            console.log('that hindex = ' + that.hindex.hindex_incites);
+          that.hasHindexData = !that.isEmptyHindexResults();
+
         });
 
         this.$.apiStats.addEventListener('uqlibrary-api-academic-stats-loaded', function (e) {
           that.stats = e.detail.stats.stats_fields;
-            console.log(that.stats.id.count);
-            var total = that.stats.id.count + that.hindex.hindex_incites + that.stats.thomson_citation_count_i.count + that.stats.thomson_citation_count_i.sum + that.hindex.hindex_scopus + that.stats.scopus_citation_count_i.count + that.stats.scopus_citation_count_i.sum;
-            console.log(total);
-//            if (total != 0) {
-//                hasData = true;
-//            }
+          that.hasStatsData = !that.isEmptyStatsResults();
         });
       },
 
@@ -145,6 +139,22 @@
         else {
           return value;
         }
+      },
+
+      isEmptyStatsResults: function () {
+        return ((!this.stats.hasOwnProperty("id") || (this.stats.hasOwnProperty("id") && this.stats.id.count == 0))
+               && (!this.stats.hasOwnProperty("thomson_citation_count_i")
+                  || (this.stats.hasOwnProperty("thomson_citation_count_i")
+                      && (this.stats.thomson_citation_count_i == null || (this.stats.thomson_citation_count_i.count == 0 && this.stats.thomson_citation_count_i.sum == 0))))
+
+               && (!this.stats.hasOwnProperty("scopus_citation_count_i")
+                  || (this.stats.hasOwnProperty("scopus_citation_count_i")
+                      && (this.stats.scopus_citation_count_i == null || (this.stats.scopus_citation_count_i.count == 0 && this.stats.scopus_citation_count_i.sum == 0)))));
+      },
+
+      isEmptyHindexResults: function () {
+        return (!this.hindex.hasOwnProperty("hindex_incites") || (this.hindex.hasOwnProperty("hindex_incites") && this.hindex.hindex_incites == 0))
+          && (!this.hindex.hasOwnProperty("hindex_scopus") || (this.hindex.hasOwnProperty("hindex_scopus") && this.hindex.hindex_scopus == 0));
       }
 
     });

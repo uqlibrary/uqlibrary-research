@@ -116,6 +116,7 @@
         var that = this;
         this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
           that.publications = e.detail;
+          that.isNoResultsMessageHidden = !that.isEmptyResults();
           this.fire('uqlibrary-research-trending-loaded');
         });
       },
@@ -162,13 +163,16 @@
         return value.replace(/;/g, ', ');
       },
 
-      isNoResultsMessageHidden: function () {
-        return (!this.publications.hasOwnProperty('altmetic')
+      isEmptyResults: function () {
+
+       return  (!this.publications.hasOwnProperty('altmetric')
                 && !this.publications.hasOwnProperty('thomson')
                 && !this.publications.hasOwnProperty('scopus')
-                && publications.altmetric.length == 0
-                && publications.thomson.length == 0
-                && publications.scopus.length == 0);
+                ||
+                ((this.publications.hasOwnProperty('altmetric') && this.publications.altmetric.length == 0)
+                && (this.publications.hasOwnProperty('thomson') && this.publications.thomson.length == 0)
+                && (this.publications.hasOwnProperty('scopus') && this.publications.scopus.length == 0)));
+
 
       }
 
