@@ -32,12 +32,14 @@ Element providing an overview for student's courses
       </core-header-panel>
 
       <core-header-panel main class="main">
-        <core-toolbar>
-          <core-a11y-keys id="a11yToolBarLeftButton" target="{{$.toolBarLeftButton}}" keys="{{keyboardNavigationKeys}}"
-                          on-keys-pressed="{{ a11yKeyPressed }}"></core-a11y-keys>
-          <paper-icon-button id="toolBarLeftButton" icon="menu" core-drawer-toggle></paper-icon-button>
-          <h1 flex id="toolbar-page-title">My research</h1>
-        </core-toolbar>
+          <uqlibrary-toolbar on-uqlibrary-toolbar-menu-clicked="{{toggleMenuDrawer}}"
+                             on-uqlibrary-toolbar-search-button-clicked="{{performSearch}}"
+                             on-uqlibrary-toolbar-search-key-pressed="{{keyPerformSearch}}"
+                             appTitle="{{'My'}} Research"
+                             appTitleLink="#"
+                             appLinks='[{"label": "Switch back", "action": "#"}]'
+                             searchPlaceholderText="Search for a researcher by username or full name">
+          </uqlibrary-toolbar>
 
         <div id="content">
 
