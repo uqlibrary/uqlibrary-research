@@ -144,7 +144,10 @@ Element providing an overview for student's courses
               that.user = e.detail;
 
               that.$.trendingElement.user = that.user;
+              that.$.trendingElement.isSearch = false;
+
               that.$.metricsElement.user = that.user;
+              that.$.metricsElement.isSearch = false;
             }
           } else {
             // Not logged in
@@ -175,6 +178,7 @@ Element providing an overview for student's courses
 
       appLinkClicked: function(e) {
         if (e.detail === '#ClearSearch') {
+          this.$.toolbar.clearSearchForm();
           this.$.toolbar.appTitle = this.appTitle;
 
           this.$.trendingElement.isSearch = false;
@@ -186,23 +190,25 @@ Element providing an overview for student's courses
       },
 
       trendingResearchLoaded: function(e) {
-        if (e.detail && e.detail.author_details && e.detail.author_details.length > 0) {
-          var author = e.detail.author_details[0];
+        if (this.$.trendingElement.isSearch) {
+          if (e.detail && e.detail.author_details && e.detail.author_details.length > 0) {
+            var author = e.detail.author_details[0];
 
-          if (this.user.id == author.aut_org_username) {
+            if (this.user.id == author.aut_org_username) {
+              this.$.toolbar.appTitle = this.appTitle;
+            }
+            else {
+              this.$.toolbar.appTitle =
+                      author.aut_title + " " +
+                      author.aut_fname + " " +
+                      author.aut_lname + "'s Research";
+
+            }
+          } else if (this.$.toolbar.searchFieldValue) {
+            this.$.toolbar.appTitle = "No Results Found";
+          } else {
             this.$.toolbar.appTitle = this.appTitle;
           }
-           else {
-            this.$.toolbar.appTitle =
-                    author.aut_title + " " +
-                    author.aut_fname + " " +
-                    author.aut_lname + "'s Research";
-
-          }
-        } else if (this.$.toolbar.searchFieldValue) {
-          this.$.toolbar.appTitle = "No Results Found";
-        } else {
-          this.$.toolbar.appTitle = this.appTitle;
         }
       },
 
