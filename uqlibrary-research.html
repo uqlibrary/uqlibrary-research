@@ -32,13 +32,13 @@ Element providing an overview for student's courses
       </core-header-panel>
 
       <core-header-panel main class="main">
-          <uqlibrary-toolbar on-uqlibrary-toolbar-menu-clicked="{{toggleMenuDrawer}}"
-                             on-uqlibrary-toolbar-search-button-clicked="{{performSearch}}"
-                             on-uqlibrary-toolbar-search-key-pressed="{{keyPerformSearch}}"
-                             appTitle="{{'My'}} Research"
-                             appTitleLink="#"
-                             appLinks='[{"label": "Switch back", "action": "#"}]'
-                             searchPlaceholderText="Search for a researcher by username or full name">
+          <uqlibrary-toolbar id="toolbar"
+                  on-uqlibrary-toolbar-menu-clicked="{{toggleMenuDrawer}}"
+                  on-uqlibrary-toolbar-search-submitted="{{performSearch}}"
+                  on-uqlibrary-toolbar-link-clicked="{{appLinkClicked}}"
+                  appTitleLink="#"
+                  appLinks='[{"label": "Clear search", "url": "#ClearSearch"}]'
+                  searchPlaceholderText="Search for a researcher by username">
           </uqlibrary-toolbar>
 
         <div id="content">
@@ -86,11 +86,14 @@ Element providing an overview for student's courses
                                on-core-animated-pages-transition-end="{{transitionEndHandler}}">
 
             <section id="sectionTrending" name="Trending">
-              <uqlibrary-research-trending user="{{user}}"></uqlibrary-research-trending>
+              <uqlibrary-research-trending id="trendingElement"
+                                           on-uqlibrary-research-trending-loaded="{{trendingResearchLoaded}}">
+              </uqlibrary-research-trending>
             </section>
 
             <section id="sectionMetrics" name="Metrics">
-              <uqlibrary-research-metrics user="{{user}}"></uqlibrary-research-metrics>
+              <uqlibrary-research-metrics id="metricsElement">
+              </uqlibrary-research-metrics>
             </section>
 
             <section id="sectionPublications" name="Publications">
@@ -118,6 +121,7 @@ Element providing an overview for student's courses
         }
       },
 
+      appTitle: 'My Research',
       autoload: true,
       selectedTab: 'Trending',
       transitioning: false,
@@ -132,11 +136,15 @@ Element providing an overview for student's courses
 
       ready: function() {
         var that = this;
+        this.$.toolbar.appTitle = this.appTitle;
 
         this.$.account.addEventListener('uqlibrary-api-account-loaded', function(e) {
           if (e.detail.hasSession) {
             if(e.detail.classes) {
               that.user = e.detail;
+
+              that.$.trendingElement.user = that.user;
+              that.$.metricsElement.user = that.user;
             }
           } else {
             // Not logged in
@@ -155,14 +163,59 @@ Element providing an overview for student's courses
         }
       },
 
+      performSearch: function(event){
+        this.$.toolbar.deactivateSearch();
+
+        this.$.trendingElement.isSearch = true;
+        this.$.trendingElement.user = { id: event.detail.searchTerm };
+
+        this.$.metricsElement.isSearch = true;
+        this.$.metricsElement.user = { id: event.detail.searchTerm };
+      },
+
+      appLinkClicked: function(e) {
+        if (e.detail === '#ClearSearch') {
+          this.$.toolbar.appTitle = this.appTitle;
+
+          this.$.trendingElement.isSearch = false;
+          this.$.trendingElement.user = this.user;
+
+          this.$.metricsElement.isSearch = false;
+          this.$.metricsElement.user = this.user;
+        }
+      },
+
+      trendingResearchLoaded: function(e) {
+        if (e.detail && e.detail.author_details && e.detail.author_details.length > 0) {
+          var author = e.detail.author_details[0];
+
+          if (this.user.id == author.aut_org_username) {
+            this.$.toolbar.appTitle = this.appTitle;
+          }
+           else {
+            this.$.toolbar.appTitle =
+                    author.aut_title + " " +
+                    author.aut_fname + " " +
+                    author.aut_lname + "'s Research";
+
+          }
+        } else if (this.$.toolbar.searchFieldValue) {
+          this.$.toolbar.appTitle = "No Results Found";
+        } else {
+          this.$.toolbar.appTitle = this.appTitle;
+        }
+      },
+
       transitioningChangeHandler: function(e) {
         if(e.detail.hasOwnProperty('transitioning'))
           this.transitioning = e.detail.transitioning;
       },
+
       transitionPrepareHandler: function() {
         this.transitioning = true;
         this.fire('core-signal', {name: "transitioning-change", data: {transitioning: this.transitioning}});
       },
+
       transitionEndHandler: function() {
         this.transitioning = false;
         this.fire('core-signal', {name: "transitioning-change", data: {transitioning: this.transitioning}});

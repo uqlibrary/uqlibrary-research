@@ -1,69 +1,60 @@
 <link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
 
-<polymer-element name="uqlibrary-research-trending" layout center attributes="user">
+<polymer-element name="uqlibrary-research-trending" layout center attributes="user isSearch">
   <template>
     <uqlibrary-api-academic-trending-publications id="api"></uqlibrary-api-academic-trending-publications>
     <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
 
     <div id="cards" vertical center-justified layout>
 
-        <paper-shadow z="1" class="card" hidden?="{{isNoResultsMessageHidden}}">
-            <div class="cardSection">
-                   It looks like we can't find any of your publications that are trending at the moment.
-            </div>
-            <div class="cardSection caption">
-                Your publications will appear here when someone else references or cites them.
-                Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus & WoS) will be displayed.
-            </div>
-        </paper-shadow>
+      <paper-shadow z="1" class="card" hidden?="{{hideNoResultsMessage}}">
+        <div class="cardSection" hidden?="{{isSearch}}">
+          It looks like we can't find any of your publications that are trending at the moment.
+        </div>
+
+        <div class="cardSection" hidden?="{{!isSearch}}">
+          It looks like we can't find any of publications that are trending at the moment for your search criteria.
+        </div>
+        <div class="cardSection caption" hidden?="{{isSearch}}">
+          Your publications will appear here when someone else references or cites them.
+          Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus &
+          WoS) will be displayed.
+        </div>
+      </paper-shadow>
 
       <template repeat="{{card in cards}}">
         <!--<template repeat="0">-->
-        <paper-shadow class="card" z="1" hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
-        <div class="subhead cardSection cardTitle">{{card.title}}</div>
+        <paper-shadow class="card" z="1"
+                      hidden?="{{ !publications[card['type']] || publications[card['type']].length == 0}}">
+          <div class="subhead cardSection cardTitle">{{card.title}}</div>
           <template repeat="{{ pub, index in publications[card['type']] }}">
             <div vertical layout>
-                <div horizontal layout center class="hoverable">
+              <div horizontal layout center class="hoverable">
 
-                    <!--<li class="list-item border" role="link" data-title="{{model.name}}" data-code="{{model.code}}" on-tap="{{itemTapHandler}}">-->
-                        <!--<div class="content" layout horizontal>-->
-                            <!--<div flex>-->
-                                <!--<div class="line1">-->
-                                    <!--<a id="library-{{model.code}}" target="_blank" href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}" title="{{model.name}}">-->
-                                        <!--<paper-ripple fit></paper-ripple>-->
-                                        <!--{{pub.title}}-->
-                                    <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="text">-->
-                                    <!--<span class="body1">{{pub.authors | formatAuthors}}, </span>-->
-                                    <!--<span hidden?={{!model.notes}}>{{pub.rek_date | showYear}}</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-                    <div class="new-title" flex>
-                    <div vertical layout>
-                        <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}" target="_blank">
+                <div class="new-title" flex>
+                  <div vertical layout>
+                    <a href="https://espace.library.uq.edu.au/view/{{pub.rek_pid}}" target="_blank">
                       <div horizontal layout>
                         <div flex class="line1">{{pub.title}}</div>
                       </div>
-                      <div class="authors caption"><span class="body1">{{pub.authors | formatAuthors}}</span> &mdash; {{pub.rek_date | showYear}}</div>
-                        </a>
-                    </div>
-                  </div>
-
-
-                  <div class="num-cites border-left" self-stretch>
-                    <a href="{{pub.citation_url}}" target="_blank">
-                      <div class="{{card.type}}">
-                        {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
+                      <div class="authors caption"><span class="body1">{{pub.authors | formatAuthors}}</span> &mdash;
+                        {{pub.rek_date | showYear}}
                       </div>
                     </a>
                   </div>
-                 </div>
                 </div>
-                <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
+
+
+                <div class="num-cites border-left" self-stretch>
+                  <a href="{{pub.citation_url}}" target="_blank">
+                    <div class="{{card.type}}">
+                      {{pub.count}}<span class="plus" hidden?="{{pub.difference == 0}}">{{pub.difference | differenceFormat}}</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <hr class="thin" hidden?="{{index == publications[card['type']].length -1}}">
           </template>
         </paper-shadow>
 
@@ -74,12 +65,14 @@
 
         <div class="cardSection">
           <a href="http://guides.library.uq.edu.au/getting-published">
-            <core-icon class="link" icon="description" aria-label=""></core-icon>Guide to Getting Published
+            <core-icon class="link" icon="description" aria-label=""></core-icon>
+            Guide to Getting Published
           </a>
         </div>
         <div class="cardSection">
           <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>See all research support
+            <core-icon class="link" icon="arrow-forward" aria-label=""></core-icon>
+            See all research support
           </a>
         </div>
       </paper-shadow>
@@ -93,67 +86,67 @@
     Polymer('uqlibrary-research-trending', {
       publications: [],
       user: null,
+      isSearch: false,
 
       cards: [
         {
-          'type' : 'altmetric',
-          'title' : 'Altmetric Score'
+          'type': 'altmetric',
+          'title': 'Altmetric Score'
         },
         {
-          'type' : 'thomson',
-          'title' : 'Web of Science Citation Count'
+          'type': 'thomson',
+          'title': 'Web of Science Citation Count'
         },
         {
-          'type' : 'scopus',
-          'title' : 'Scopus Citation Count'
+          'type': 'scopus',
+          'title': 'Scopus Citation Count'
         }
       ],
 
-      created: function() {
+      created: function () {
       },
 
-      ready: function() {
+      ready: function () {
         var that = this;
-        this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function(e) {
+        this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function (e) {
           that.publications = e.detail;
-          that.isNoResultsMessageHidden = !that.isEmptyResults();
-          this.fire('uqlibrary-research-trending-loaded');
+          that.hideNoResultsMessage = !that.isEmptyResults();
+          this.fire('uqlibrary-research-trending-loaded', e.detail);
         });
       },
 
-      userChanged: function(newValue) {
-
-        if(this.user.hasOwnProperty('id')) {
-          this.$.api.get({'username' : this.user.id});
+      userChanged: function (newValue) {
+        if (this.user.hasOwnProperty('id')) {
+          this.$.api.get({'username': this.user.id});
         }
       },
 
-      zeroIfNone: function(value) {
+      zeroIfNone: function (value) {
         var _value = parseFloat(value).toFixed(0);
-        if(_value == 0)
+        if (_value == 0)
           return '';
 
-        if(_value > 0)
-          return '+'+_value;
+        if (_value > 0)
+          return '+' + _value;
 
         return _value;
       },
 
-      differenceFormat: function(value) {
+      differenceFormat: function (value) {
         var _value = parseFloat(value).toFixed(0);
-        if(_value == 0)
+        if (_value == 0)
           return '';
 
-        if(_value > 0)
-          return '+'+_value;
+        if (_value > 0)
+          return '+' + _value;
 
         return _value;
       },
 
 
-      showYear: function(value) {
+      showYear: function (value) {
         var date = moment(value);
-        if(date.isValid()) {
+        if (date.isValid()) {
           return date.format('YYYY');
         }
         return value;
@@ -165,13 +158,13 @@
 
       isEmptyResults: function () {
 
-       return  (!this.publications.hasOwnProperty('altmetric')
-                && !this.publications.hasOwnProperty('thomson')
-                && !this.publications.hasOwnProperty('scopus')
-                ||
-                ((this.publications.hasOwnProperty('altmetric') && this.publications.altmetric.length == 0)
-                && (this.publications.hasOwnProperty('thomson') && this.publications.thomson.length == 0)
-                && (this.publications.hasOwnProperty('scopus') && this.publications.scopus.length == 0)));
+        return (!this.publications.hasOwnProperty('altmetric')
+        && !this.publications.hasOwnProperty('thomson')
+        && !this.publications.hasOwnProperty('scopus')
+        ||
+        ((this.publications.hasOwnProperty('altmetric') && this.publications.altmetric.length == 0)
+        && (this.publications.hasOwnProperty('thomson') && this.publications.thomson.length == 0)
+        && (this.publications.hasOwnProperty('scopus') && this.publications.scopus.length == 0)));
 
 
       }
