@@ -179,19 +179,21 @@ Element providing an overview for student's courses
         var suggestions = [];
         if(event.detail.length > 0){
           event.detail.forEach(function(item) {
-            suggestions.push( { text: item.title + ' ' + item.given_name + ' ' + item.family_name + ' ('+ item.username + ')', value: item.username } );
+            item.text = item.title + ' ' + item.given_name + ' ' + item.family_name + ' ('+ item.username + ')';
+            suggestions.push(item);
           });
 
-          this.$.toolbar.fire('uqlibrary-toolbar-search-suggestions-loaded', { data: suggestions })
+          this.$.toolbar.suggestions = suggestions;
         }
       },
 
       performSearch: function(event){
         this.$.toolbar.deactivateSearch();
 
-        //check if auto suggest was selected
-        //TODO: replace with objs selected
-        var userId = event.detail.searchTerm.replace(/.*\(|\)/gi, '');
+        var userId = event.detail.searchTerm;
+        if (event.detail.searchItem) {
+          userId = event.detail.searchItem.username;
+        }
 
         this.$.trendingElement.isSearch = true;
         this.$.trendingElement.user = { id: userId };
@@ -249,7 +251,12 @@ Element providing an overview for student's courses
       transitionEndHandler: function() {
         this.transitioning = false;
         this.fire('core-signal', {name: "transitioning-change", data: {transitioning: this.transitioning}});
+      },
+
+      toggleMenuDrawer: function(){
+        this.$.drawerPanel.togglePanel();
       }
+
     });
   </script>
 
