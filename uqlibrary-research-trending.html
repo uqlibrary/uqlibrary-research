@@ -1,4 +1,4 @@
-<link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
+<link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html" xmlns="http://www.w3.org/1999/html">
 
 <polymer-element name="uqlibrary-research-trending" layout center attributes="user isSearch">
   <template>
@@ -61,6 +61,22 @@
         </paper-shadow>
 
       </template>
+
+      <paper-shadow z="1" class="card" hidden?="{{!hideNoResultsMessage}}">
+        <div class="subhead cardSection cardTitle">
+          <core-icon class="link" icon="info" aria-label=""></core-icon>
+          About these metrics</div>
+
+        <div class="cardSection">
+            For Web of Science and Scopus, the larger number is the total current citation count, and the
+            'plus' value indicates the increase in count in the last month. <br /><br />
+
+            For Altmetric Score, the larger number is the total score, and the 'plus' value shows the most recent increase
+            in a recent period, in ascending order of time period. For example if the most recent increase was in the last week, that increase
+            would show first over an increase in the last month, 3 months, 6 months and year.
+        </div>
+      </paper-shadow>
+
 
       <paper-shadow z="1" class="card">
         <div class="subhead cardSection cardTitle">Research guides</div>
