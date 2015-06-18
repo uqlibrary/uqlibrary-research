@@ -115,7 +115,7 @@
         setTimeout(function() {
           // Check number of cards
           var cards = parent.shadowRoot.querySelectorAll('paper-shadow.card');
-          expect(cards.length).to.be.equal(5);
+          expect(cards.length).to.be.equal(6);
 
           //Check items for each card
           expect(parent.publications.altmetric).to.have.deep.property('[1].title', publications.altmetric[1].title);
