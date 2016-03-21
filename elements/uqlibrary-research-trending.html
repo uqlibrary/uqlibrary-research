@@ -1,0 +1,109 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-research-trending>` is an overview for users courses and academic output
+
+Example:
+    <uqlibrary-research-trending></uqlibrary-research-trending>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-research-trending">
+  <style is="custom-style" include="research-styles">
+    :host {
+      @apply(--uql-app-host);
+      @apply(--layout-center);
+    }
+  </style>
+
+
+  <!-- Template -->
+  <template>
+    <uqlibrary-api-academic-trending-publications id="api"></uqlibrary-api-academic-trending-publications>
+
+    <paper-card heading="Research guides" hidden$="{{hideNoResultsMessage}}">
+      <div class="card-content" hidden$="{{isSearch}}">
+        It looks like we can't find any of your publications that are trending at the moment.
+      </div>
+
+      <div class="card-content" hidden$="{{!isSearch}}">
+        It looks like we can't find any of publications that are trending at the moment for your search criteria.
+      </div>
+      <div class="card-content caption" hidden$="{{isSearch}}">
+        Your publications will appear here when someone else references or cites them.
+        Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus
+        &amp;
+        WoS) will be displayed.
+      </div>
+    </paper-card>
+
+    <template is="dom-repeat" items="{{cards}}" as="card">
+      <!--<template repeat="0">-->
+      <paper-card hidden$="{{_computeHidden(card, publications)}}" heading="{{card.title}}">
+        <template is="dom-repeat" items="{{_computeItems(card, publications)}}" as="pub" index-as="index">
+          <div class="card-actions trending-line">
+            <div class="title">
+              <a target="_blank" href$="{{_computeHref(pub)}}">
+                <div class="line1">{{pub.title}}</div>
+                <div class="authors caption"><span class="body1">{{formatAuthors(pub.authors)}}</span> —
+                  <span>{{showYear(pub.rek_date)}}</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="num-cites stat">
+              <a target="_blank" href$="{{pub.citation_url}}">
+                <div class$="{{card.type}}">
+                  <span>{{pub.count}}</span><span class="plus" hidden$="{{_computeHidden2(pub)}}">{{differenceFormat(pub.difference)}}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </template>
+      </paper-card>
+
+    </template>
+
+    <paper-card hidden$="{{!hideNoResultsMessage}}" class="info-header">
+      <!-- mimic the polymer structure to add icon -->
+      <div class="header paper-card">
+        <div class="title-text paper-card">
+          <iron-icon icon="info"></iron-icon>
+          About these metrics
+        </div>
+      </div>
+      <div class="card-content">
+        For the above metrics, the larger number is the total current citation count,
+        and the + (plus) value indicates how much the citation count has changed in the last month.
+        The Altmetric score plus value is slightly different, as it shows the 3 most recent increases first, ranging
+        from 1 day to 1 year.<br><br>
+
+        You can click on the number as a link to see who is citing each publication, or in the case of Altmetric who is
+        referencing
+        the publication in social media and news outlets.
+      </div>
+    </paper-card>
+
+    <paper-card heading="Research guides">
+      <div class="card-actions">
+        <a href="http://guides.library.uq.edu.au/getting-published">
+          <iron-icon class="link" icon="description" aria-label=""></iron-icon>
+          Guide to Getting Published
+        </a>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.library.uq.edu.au/research-support" target="_blank">
+          <iron-icon class="link" icon="arrow-forward" aria-label=""></iron-icon>
+          See all research support
+        </a>
+      </div>
+    </paper-card>
+
+    </div>
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-research-trending.js"></script>
+</dom-module>

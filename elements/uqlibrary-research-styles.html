@@ -1,0 +1,96 @@
+<dom-module id="research-styles">
+  <template>
+    <style is="custom-style" include="common-styles">
+      paper-card {
+        width: 95%;
+        margin-top: 1em;
+      }
+
+      #espace-pubs {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--layout-center-justified);
+      }
+
+      #publications {
+        color: var(--available-color);
+        font-size: 24px;
+        margin-right: 8px;
+      }
+
+      div.trending-line,
+      #scopus-stats,
+      #wos-stats {
+        @apply(--layout-horizontal);
+        padding: 0;
+      }
+
+      #scopus-stats > div.metrics-type,
+      #wos-stats > div.metrics-type {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+        @apply(--layout-self-center);
+        padding-left: 16px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      div.stat {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        @apply(--layout-center-justified);
+        background-color: #FAFAFA;
+        border-left: 1px solid #ccc;
+        padding: 5px;
+      }
+
+      #scopus-stats div.metrics-cites,
+      #wos-stats div.metrics-cites {
+        color: #333;
+        padding: 0.4em 0 0.1em 0;
+        font-size: 24px;
+        font-weight: 400;
+        width: 3em;
+        text-align: center;
+      }
+
+      #scopus-stats div.type-cites,
+      #wos-stats div.type-cites {
+        color: #333;
+        font-size: 11px;
+      }
+
+      div.trending-line a {
+        text-decoration: none;
+      }
+
+      div.trending-line div.title {
+        @apply(--layout-flex);
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      div.trending-line div.caption {
+        font-weight: 300;
+      }
+
+      div.trending-line div.num-cites {
+        width: 4em;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      div.trending-line div.num-cites a {
+        color: var(--available-color);
+      }
+
+      div.trending-line div.num-cites span.plus {
+        color: #333;
+        font-size: 14px;
+        vertical-align: super;
+        padding: 5px;
+      }
+    </style>
+  </template>
+</dom-module>
