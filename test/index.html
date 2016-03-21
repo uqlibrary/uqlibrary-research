@@ -1,21 +1,26 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
-    <title>Tests</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title>Tests</title>
 
-    <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
 </head>
 
 <body>
 <script>
-    document.cookie="UQLMockData=enabled";
-    // Load and run all tests (.html, .js) as one suite:
-    WCT.loadSuites([
-        'uqlibrary-research-test-unit.html'
-    ]);
+  document.cookie = "UQLMockData=enabled";
+  // Load and run all tests (.html, .js) as one suite:
+  WCT.loadSuites([
+    'uqlibrary-research-metrics-test-functional.html',
+    'uqlibrary-research-metrics-test-unit.html',
+    'uqlibrary-research-test-functional.html',
+    'uqlibrary-research-test-unit.html',
+    'uqlibrary-research-trending-test-functional.html',
+    'uqlibrary-research-trending-test-unit.html'
+  ]);
 </script>
 </body>
 </html>
