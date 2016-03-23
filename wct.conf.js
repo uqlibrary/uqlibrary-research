@@ -8,8 +8,8 @@ var ret = {
 	plugins: {
 		local: {
 			browsers: [
-				//'firefox',
-				'chrome'
+				//'chrome',  // chrome hanging on fonts.googleapis.com
+				'firefox'
 			]
 		}
 	}

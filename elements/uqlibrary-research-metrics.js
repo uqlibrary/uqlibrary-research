@@ -54,9 +54,12 @@ Polymer({
         'scopus_citation_count_i') && (this.stats.scopus_citation_count_i == null || this.stats.scopus_citation_count_i.count == 0 && this.stats.scopus_citation_count_i.sum == 0));
   },
   isEmptyHindexResults: function () {
-    return (!this.hindex.hasOwnProperty('hindex_incites') || this.hindex.hasOwnProperty(
-        'hindex_incites') && this.hindex.hindex_incites == 0) && (!this.hindex.hasOwnProperty(
-        'hindex_scopus') || this.hindex.hasOwnProperty('hindex_scopus') && this.hindex.hindex_scopus == 0);
+    return (!this.hindex.hasOwnProperty('hindex_incites')
+      || this.hindex.hasOwnProperty('hindex_incites')
+      && this.hindex.hindex_incites == 0)
+      && (!this.hindex.hasOwnProperty('hindex_scopus')
+      || this.hindex.hasOwnProperty('hindex_scopus')
+      && this.hindex.hindex_scopus == 0);
   },
   hostAttributes: {
     'layout': '',

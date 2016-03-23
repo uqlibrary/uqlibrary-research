@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title>uqlibrary-research-metrics test</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="../elements/uqlibrary-research-metrics.html">
+</head>
+<body>
+
+<test-fixture id="element">
+  <template>
+    <uqlibrary-research-metrics></uqlibrary-research-metrics>
+  </template>
+</test-fixture>
+
+<script>
+  suite('<uqlibrary-research-metrics> tests', function () {
+    var element;
+
+    var hindex = {
+      "hindex_scopus": 22,
+      "hindex_incites": 23
+    };
+
+    var stats = {
+      "thomson_citation_count_i": {
+        "count": 157,
+        "sum": 6736
+      },
+      "scopus_citation_count_i": {
+        "count": 159,
+        "sum": 6897
+      },
+      "id": {
+        "count": 173
+      }
+    };
+
+    setup(function () {
+      element = fixture('element');
+      element.stats = stats;
+      element.hindex = hindex;
+      element.hasHindexData = true;
+    });
+
+    test('It should display', function () {
+      expect(element).to.not.be.null;
+    });
+
+    test('it should have a count of eSpace publications', function () {
+      var countCont = element.querySelector('#publications');
+      expect(countCont).not.to.be.null;
+      expect(countCont.textContent).to.equal('173');
+    });
+
+    test('it should have a count of WOS publications', function () {
+      var countCont = element.querySelector('#wos-stats div.papers div.metrics-cites');
+      var citCont = element.querySelector('#wos-stats div.citations div.metrics-cites');
+
+      expect(countCont).not.to.be.null;
+      expect(countCont.textContent).to.equal('157');
+      expect(citCont).not.to.be.null;
+      expect(citCont.textContent).to.equal('6736');
+    });
+
+    test('it should have a count of Scopus publications', function () {
+      var countCont = element.querySelector('#scopus-stats div.papers div.metrics-cites');
+      var citCont = element.querySelector('#scopus-stats div.citations div.metrics-cites');
+
+      expect(countCont).not.to.be.null;
+      expect(countCont.textContent).to.equal('159');
+      expect(citCont).not.to.be.null;
+      expect(citCont.textContent).to.equal('6897');
+    });
+
+    test('it should have the WOS hindex', function () {
+      var hindexCont = element.querySelector('#wos-stats div.type-cites div.metrics-cites');
+
+      expect(hindexCont).not.to.be.null;
+      expect(hindexCont.textContent).to.equal('23');
+    });
+
+    test('it should have the Scopus hindex', function () {
+      var hindexCont = element.querySelector('#scopus-stats div.type-cites div.metrics-cites');
+
+      expect(hindexCont).not.to.be.null;
+      expect(hindexCont.textContent).to.equal('22');
+    });
+  });
+</script>
+
+</body>
+</html>
