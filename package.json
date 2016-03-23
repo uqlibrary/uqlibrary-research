@@ -24,5 +24,8 @@
   },
   "devDependencies": {
     "web-component-tester": "~4.2.2"
+  },
+  "dependencies": {
+    "bower": "~1.7.7"
   }
 }
