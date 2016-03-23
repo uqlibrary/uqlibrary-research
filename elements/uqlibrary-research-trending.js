@@ -46,10 +46,13 @@
     ready: function () {
       var that = this;
       this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function (e) {
-        that.publications = e.detail;
+        that.setPublications(e.detail);
         that.hideNoResultsMessage = !that.isEmptyResults();
-        this.fire('uqlibrary-research-trending-loaded', e.detail);
       });
+    },
+    setPublications: function(val) {
+      this.publications = val;
+      this.fire('uqlibrary-research-trending-loaded', val);
     },
     _userChanged: function () {
       if (this.user.hasOwnProperty('id')) {
