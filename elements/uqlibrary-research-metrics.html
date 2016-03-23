@@ -12,22 +12,22 @@
     <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
     <uqlibrary-api-academic-stats id="apiStats"></uqlibrary-api-academic-stats>
 
-    <paper-material elevation="1" class="card" hidden$="{{_computeHidden(hasHindexData, hasStatsData)}}">
-      <div class="cardSection" hidden$="{{isSearch}}">
+    <paper-card elevation="1" class="card" hidden$="{{_computeHidden(hasHindexData, hasStatsData)}}">
+      <div class="card-actions" hidden$="{{isSearch}}">
         It looks like we don't have any publications that have any recorded citation counts yet.
       </div>
 
-      <div class="cardSection" hidden$="{{!isSearch}}">
+      <div class="card-actions" hidden$="{{!isSearch}}">
         It looks like we don't have any publications that have any recorded citation counts yet for your search
         criteria.
       </div>
 
-      <div class="cardSection caption" hidden$="{{isSearch}}">
+      <div class="card-actions caption" hidden$="{{isSearch}}">
         Your publications will appear here when someone else references or cites them.
         Your total score or citation count and the amount it's changed in the past year (Altmetrics) or month (Scopus
         &amp; WoS) will be displayed.
       </div>
-    </paper-material>
+    </paper-card>
 
     <paper-card hidden$="{{_computeHidden2(hasHindexData, hasStatsData)}}" heading="{{metricsHeading}}" id="espace-pubs-container">
       <a target="_blank" href$="{{_computeHref(user)}}">

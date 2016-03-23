@@ -6,9 +6,6 @@ Polymer({
     },
     user: {
       type: Object,
-      value: function () {
-        return {};
-      },
       notify: true,
       observer: 'userChanged'
     }
@@ -16,6 +13,7 @@ Polymer({
   created: function () {
   },
   userChanged: function (_, newValue) {
+    console.log('userChanged ' + JSON.stringify(newValue));
     if (this.user.hasOwnProperty('id')) {
       this.$.api.get({username: this.user.id});
       this.$.apiStats.get({username: this.user.id});

@@ -31,9 +31,7 @@
       },
       publications: {
         type: Array,
-        value: function () {
-          return [];
-        }
+        value: [],
       },
       user: {
         type: Object,
