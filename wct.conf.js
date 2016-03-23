@@ -8,7 +8,7 @@ var ret = {
 	plugins: {
 		local: {
 			browsers: [
-				//'chrome',  // chrome hanging on fonts.googleapis.com
+				//'chrome'///,
 				'firefox'
 			]
 		}
