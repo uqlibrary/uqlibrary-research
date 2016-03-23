@@ -24,20 +24,11 @@
 				value: 0,
 				observer: 'selectedTabChanged'
 			},
-			transitioning: {
-				type: Boolean,
-				value: false
-			},
 			user: {
 				type: Object,
 				value: function () {
 					return {};
 				}
-			}
-		},
-		a11yKeyPressed: function (source, event) {
-			if (source.path && source.path.length > 0 && source.path[0].target) {
-				source.path[0].target.fire('tap');
 			}
 		},
 		/**
@@ -123,24 +114,6 @@
 					this.set('$.toolbar.appTitle', this.appTitle);
 				}
 			}
-		},
-		transitioningChangeHandler: function (e) {
-			if (e.detail.hasOwnProperty('transitioning'))
-				this.transitioning = e.detail.transitioning;
-		},
-		transitionPrepareHandler: function () {
-			this.transitioning = true;
-			this.fire('core-signal', {
-				name: 'transitioning-change',
-				data: { transitioning: this.transitioning }
-			});
-		},
-		transitionEndHandler: function () {
-			this.transitioning = false;
-			this.fire('core-signal', {
-				name: 'transitioning-change',
-				data: { transitioning: this.transitioning }
-			});
 		},
 		toggleMenuDrawer: function () {
 			this.$.drawerPanel.togglePanel();

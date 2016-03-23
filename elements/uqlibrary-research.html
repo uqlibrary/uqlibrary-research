@@ -22,8 +22,6 @@ Example:
 
   <!-- Template -->
   <template>
-    <iron-signals on-core-signal-transitioning-change="transitioningChangeHandler"></iron-signals>
-
     <uqlibrary-api-account id="account"></uqlibrary-api-account>
     <uqlibrary-api-authors-search id="authorsSearchApi"
                                   on-uqlibrary-api-authors-search-loaded="autosuggestLoaded"></uqlibrary-api-authors-search>
@@ -33,21 +31,17 @@ Example:
     <div main class="layout vertical fit relative" style="margin-top: 64px;">
       <div id="content" class="fit" style="overflow: scroll;">
 
-        <paper-tabs id="tabs" selected="{{ selectedTab }}" on-core-select=" tabSelected ">
+        <paper-tabs id="tabs" selected="{{selectedTab}}" on-iron-select="tabSelected">
 
           <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
             <div class="menu">
-              <uqlibrary-a11y-link>
-                <div class="tabTitle layout vertical center">Trending Publications</div>
-              </uqlibrary-a11y-link>
+              <div class="tabTitle layout vertical center">Trending Publications</div>
             </div>
           </paper-tab>
 
           <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
             <div class="menu">
-              <uqlibrary-a11y-link>
-                <div class="tabTitle layout vertical center">Metrics</div>
-              </uqlibrary-a11y-link>
+              <div class="tabTitle layout vertical center">Metrics</div>
             </div>
           </paper-tab>
 
@@ -62,18 +56,14 @@ Example:
 
           <!--<paper-tab name="Publications" id="tabPublications" aria-label="My publications">-->
           <!--<div class="menu">-->
-          <!--<uqlibrary-a11y-link>-->
           <!--<div class="tabTitle" layout vertical center>Publications</div>-->
-          <!--</uqlibrary-a11y-link>-->
           <!--</div>-->
           <!--</paper-tab>-->
 
         </paper-tabs>
 
         <neon-animated-pages class="flex" id="animatedPages" entry-animation="slide-from-right-animation"
-                             exit-animation="slide-left-animation" selected="{{ selectedTab }}" valueattr="name"
-                             on-core-animated-pages-transition-prepare="transitionPrepareHandler"
-                             on-core-animated-pages-transition-end="transitionEndHandler">
+                             exit-animation="slide-left-animation" selected="{{ selectedTab }}" valueattr="name">
 
           <section id="sectionTrending" name="Trending">
             <uqlibrary-research-trending id="trendingElement"
