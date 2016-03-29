@@ -6,10 +6,11 @@ echo "Testing branch: ${CI_BRANCH}"
 
 # If polymer 1.0
 if [ ${CI_BRANCH} == "polymer1.0" ]; then
-
     if [ ${PIPE_NUM} == 1 ]; then
         # Run local tests
         echo "Starting local WCT tests"
+        npm install
+        bower install
         wct
     else
         echo "Pipe not used"
