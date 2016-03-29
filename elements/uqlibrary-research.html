@@ -13,10 +13,14 @@ Example:
 -->
 <dom-module id="uqlibrary-research">
   <!-- All element styles -->
-  <style is="custom-style" include="common-styles">
+  <style is="custom-style" include="research-styles">
     :host {
       @apply(--uql-app-host);
       @apply(--layout-center);
+    }
+
+    #content {
+      overflow: scroll;
     }
   </style>
 
@@ -28,7 +32,7 @@ Example:
 
     <uqlibrary-ga id="ga" appname="Research"></uqlibrary-ga>
 
-    <div main class="layout vertical fit relative" style="margin-top: 64px;">
+    <div main>
       <div id="content" class="fit" style="overflow: scroll;">
 
         <paper-tabs id="tabs" selected="{{selectedTab}}">
