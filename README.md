@@ -1,13 +1,12 @@
 # uqlibrary-research
 
-uqlibrary-research is a sample element showing how uqlibrary elements should be structured.
+uqlibrary-research displays various academic data to the end user
 
 Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-research).
 
 ### Getting Started
-Install Node.JS and run the following oneliner in the project directory:
 ```sh
-npm install -g bower && bower install
+npm install && bower install
 ```
 
 ### Developing
