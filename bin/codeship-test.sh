@@ -3,7 +3,7 @@
 echo "Testing branch: ${CI_BRANCH}"
 
 echo "Installing global dependencies"
-npm install -g web-component-tester wct-sauce@1.6.0 bower
+npm install -g web-component-tester@v3.1.7 wct-sauce@1.6.0 bower
 export NPM_ROOT=$(npm root -g)
 cp -r $NPM_ROOT/wct-sauce $NPM_ROOT/web-component-tester/node_modules
 
