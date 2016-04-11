@@ -65,14 +65,15 @@
 		},
 		loadAutosuggest: function (event) {
 			if (event.detail.value.length >= 2) {
-				this.$.autorsSearchApi.get({ lookupName: event.detail.value });
+				this.$.authorsSearchApi.get({ lookupName: event.detail.value });
 			}
 		},
 		autosuggestLoaded: function (event) {
 			var suggestions = [];
 			if (event.detail.length > 0) {
 				event.detail.forEach(function (item) {
-					item.text = item.title + ' ' + item.given_name + ' ' + item.family_name + ' (' + item.username + ')';
+					item.name = item.title + ' ' + item.given_name + ' ' + item.family_name + ' (' + item.username + ')';
+					item.recent = false;
 					suggestions.push(item);
 				});
 				this.set('$.toolbar.suggestions', suggestions);

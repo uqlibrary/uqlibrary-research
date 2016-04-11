@@ -32,62 +32,75 @@ Example:
 
     <uqlibrary-ga id="ga" appname="Research"></uqlibrary-ga>
 
-    <div main>
-      <div id="content" class="fit" style="overflow: scroll;">
-
-        <paper-tabs id="tabs" selected="{{selectedTab}}">
-
-          <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
-            <div class="menu">
-              <div class="tabTitle layout vertical center">Trending Publications</div>
-            </div>
-          </paper-tab>
-
-          <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
-            <div class="menu">
-              <div class="tabTitle layout vertical center">Metrics</div>
-            </div>
-          </paper-tab>
-
-
-          // ____ _ _ _ _ _ _____ _
-          // | _ \ _ _| |__ | (_) ___ __ _| |_(_) ___ _ __ ___ |_ _|_ _| |__
-          // | |_) | | | | '_ \| | |/ __/ _` | __| |/ _ \| '_ \/ __| | |/ _` | '_ \
-          // | __/| |_| | |_) | | | (__ (_| | |_| | (_) | | | \__ \ | | (_| | |_) |
-          // |_| \__,_|_.__/|_|_|\___\__,_|\__|_|\___/|_| |_|___/ |_|\__,_|_.__/
-          //
-          <!--Publications tab not used yet - uncomment when needed-->
-
-          <!--<paper-tab name="Publications" id="tabPublications" aria-label="My publications">-->
-          <!--<div class="menu">-->
-          <!--<div class="tabTitle" layout vertical center>Publications</div>-->
-          <!--</div>-->
-          <!--</paper-tab>-->
-
-        </paper-tabs>
-
-        <neon-animated-pages class="flex" id="animatedPages" entry-animation="slide-from-right-animation"
-                             exit-animation="slide-left-animation" selected="{{ selectedTab }}" valueattr="name">
-
-          <section id="sectionTrending" name="Trending">
-            <uqlibrary-research-trending id="trendingElement"
-                                         on-uqlibrary-research-trending-loaded="trendingResearchLoaded">
-            </uqlibrary-research-trending>
-          </section>
-
-          <section id="sectionMetrics" name="Metrics">
-            <uqlibrary-research-metrics id="metricsElement">
-            </uqlibrary-research-metrics>
-          </section>
-
-          <section id="sectionPublications" name="Publications">
-            <div><h2>This is publications info</h2></div>
-          </section>
-
-        </neon-animated-pages>
-
+    <paper-drawer-panel id="drawerPanel" class="drawer" drawerWidth="256px" responsiveWidth="768px">
+      <div drawer class="left-drawer" fit style="overflow: scroll;">
+        <uqlibrary-menu id="uqlibraryMenu" account="{{user}}"></uqlibrary-menu>
       </div>
-    </div>
+
+      <div main>
+        <div id="content" class="fit" style="overflow: scroll;">
+          <uqlibrary-toolbar id="toolbar"
+                             on-uqlibrary-toolbar-menu-clicked="toggleMenuDrawer"
+                             on-uqlibrary-toolbar-search-submitted="performSearch"
+                             on-uqlibrary-toolbar-link-clicked="appLinkClicked"
+                             on-uqlibrary-toolbar-search-value-changed="loadAutosuggest"
+                             app-title='Research'
+                             search-placeholder-text="Search for Researcher"></uqlibrary-toolbar>
+
+          <paper-tabs id="tabs" selected="{{selectedTab}}">
+
+            <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
+              <div class="menu">
+                <div class="tabTitle layout vertical center">Trending Publications</div>
+              </div>
+            </paper-tab>
+
+            <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
+              <div class="menu">
+                <div class="tabTitle layout vertical center">Metrics</div>
+              </div>
+            </paper-tab>
+
+
+            // ____ _ _ _ _ _ _____ _
+            // | _ \ _ _| |__ | (_) ___ __ _| |_(_) ___ _ __ ___ |_ _|_ _| |__
+            // | |_) | | | | '_ \| | |/ __/ _` | __| |/ _ \| '_ \/ __| | |/ _` | '_ \
+            // | __/| |_| | |_) | | | (__ (_| | |_| | (_) | | | \__ \ | | (_| | |_) |
+            // |_| \__,_|_.__/|_|_|\___\__,_|\__|_|\___/|_| |_|___/ |_|\__,_|_.__/
+            //
+            <!--Publications tab not used yet - uncomment when needed-->
+
+            <!--<paper-tab name="Publications" id="tabPublications" aria-label="My publications">-->
+            <!--<div class="menu">-->
+            <!--<div class="tabTitle" layout vertical center>Publications</div>-->
+            <!--</div>-->
+            <!--</paper-tab>-->
+
+          </paper-tabs>
+
+          <neon-animated-pages class="flex" id="animatedPages" entry-animation="slide-from-right-animation"
+                               exit-animation="slide-left-animation" selected="{{ selectedTab }}" valueattr="name">
+
+            <section id="sectionTrending" name="Trending">
+              <uqlibrary-research-trending id="trendingElement"
+                                           on-uqlibrary-research-trending-loaded="trendingResearchLoaded">
+              </uqlibrary-research-trending>
+            </section>
+
+            <section id="sectionMetrics" name="Metrics">
+              <uqlibrary-research-metrics id="metricsElement">
+              </uqlibrary-research-metrics>
+            </section>
+
+            <section id="sectionPublications" name="Publications">
+              <div><h2>This is publications info</h2></div>
+            </section>
+
+          </neon-animated-pages>
+
+        </div>
+      </div>
+    </paper-drawer-panel>
   </template>
 
   <!-- Location of the script -->
