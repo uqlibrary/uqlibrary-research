@@ -36,7 +36,7 @@
      * Show/hide main menu
      * */
     togglePanel: function () {
-      this.$.drawerPanel.togglePanel();
+      this.fire('uqlibrary-toggle-drawer');
     },
     ready: function () {
       this.set('$.toolbar.appTitle', this.appTitle);
