@@ -5,6 +5,7 @@
   Polymer({
     is: 'uqlibrary-research-trending',
     properties: {
+      // use these to display different sections of page
       cards: {
         type: Array,
         value: function () {
@@ -24,11 +25,13 @@
           ];
         }
       },
+      // are we pulling in the account user, or are we searching for a user
       isSearch: {
         type: Boolean,
         value: false,
         notify: true
       },
+      // list of the currently viewed users publications
       publications: {
         type: Array,
         value: [],
@@ -39,24 +42,41 @@
         observer: '_userChanged'
       }
     },
-    created: function () {
+    /**
+     * Call back for when pubs are loaded from the API
+     *
+     * @param e
+     */
+    trendingPublicationsLoaded: function (e) {
+      this.setPublications(e.detail);
+      this.hideNoResultsMessage = !this.isEmptyResults();
     },
-    ready: function () {
-      var that = this;
-      this.$.api.addEventListener('uqlibrary-api-academic-trending-publication', function (e) {
-        that.setPublications(e.detail);
-        that.hideNoResultsMessage = !that.isEmptyResults();
-      });
-    },
+    /**
+     * Add the pubs to the new value, fire loaded event
+     *
+     * @param val
+     */
     setPublications: function(val) {
       this.publications = val;
       this.fire('uqlibrary-research-trending-loaded', val);
     },
+    /**
+     * User changed callback, means we probably need to load up
+     * a new user
+     *
+     * @private
+     */
     _userChanged: function () {
       if (this.user.hasOwnProperty('id')) {
         this.$.api.get({ 'username': this.user.id });
       }
     },
+    /**
+     * If we get null values, we want to display zeroes
+     *
+     * @param value
+     * @returns {*}
+     */
     zeroIfNone: function (value) {
       var _value = parseFloat(value).toFixed(0);
       if (_value == 0)
@@ -65,6 +85,15 @@
         return '+' + _value;
       return _value;
     },
+    /**
+     * Formats the difference in the given trending statistic
+     *
+     * If the passed in value is positive, adds a + sign and returns value
+     * otherwise returns nothing
+     *
+     * @param value
+     * @returns {*}
+     */
     differenceFormat: function (value) {
       var _value = parseFloat(value).toFixed(0);
       if (_value == 0)
@@ -80,15 +109,22 @@
       }
       return value;
     },
+    /**
+     * Makes authors display nicer
+     *
+     * @param value
+     * @returns {*}
+     */
     formatAuthors: function (value) {
       return value.replace(/;/g, ', ');
     },
+    /**
+     * Kit!!
+     *
+     * @returns {boolean|*}
+     */
     isEmptyResults: function () {
       return !this.publications.hasOwnProperty('altmetric') && !this.publications.hasOwnProperty('thomson') && !this.publications.hasOwnProperty('scopus') || this.publications.hasOwnProperty('altmetric') && this.publications.altmetric.length == 0 && (this.publications.hasOwnProperty('thomson') && this.publications.thomson.length == 0) && (this.publications.hasOwnProperty('scopus') && this.publications.scopus.length == 0);
-    },
-    hostAttributes: {
-      'layout': '',
-      'center': ''
     },
     _computeHidden: function (card, publications) {
       return !publications[card['type']] || publications[card['type']].length == 0;

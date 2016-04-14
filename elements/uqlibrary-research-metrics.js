@@ -1,6 +1,7 @@
 Polymer({
   is: 'uqlibrary-research-metrics',
   properties: {
+    // are we pulling in the account user, or are we searching for a user
     isSearch: {
       observer: 'searchChanged'
     },
@@ -10,15 +11,20 @@ Polymer({
       observer: 'userChanged'
     }
   },
-  created: function () {
-  },
-  userChanged: function (_, newValue) {
+  /**
+   * If the outer container changes the user, load up the new
+   * user with their stats
+   */
+  userChanged: function () {
     if (this.user.hasOwnProperty('id')) {
       this.$.api.get({username: this.user.id});
       this.$.apiStats.get({username: this.user.id});
     }
   },
-  searchChanged: function (_, newValue) {
+  /**
+   * Called when the search changes, just changes title
+   */
+  searchChanged: function () {
     this.metricsHeading = this.isSearch ? 'Metrics' : 'My Metrics';
   },
   setHindex: function (val) {
@@ -27,27 +33,34 @@ Polymer({
   setStats: function (val) {
     this.stats = val;
   },
-  ready: function () {
-    var that = this;
-    this.$.api.addEventListener('uqlibrary-api-academic-hindex-loaded', function (e) {
-      that.setHindex(e.detail);
-      that.hasHindexData = !that.isEmptyHindexResults();
-    });
-    this.$.apiStats.addEventListener('uqlibrary-api-academic-stats-loaded', function (e) {
-      that.stats = {};
-      if (e.detail && e.detail.stats)
-        that.setStats(e.detail.stats.stats_fields);
-      that.hasStatsData = !that.isEmptyStatsResults();
-    });
+  /**
+   * Callback for hindex api
+   * @param e
+   */
+  hIndexLoaded: function (e) {
+    this.setHindex(e.detail);
+    this.hasHindexData = !this.isEmptyHindexResults();
   },
+  academicStatsLoaded: function (e) {
+    this.stats = {};
+    if (e.detail && e.detail.stats) {
+      this.setStats(e.detail.stats.stats_fields);
+    }
+    this.hasStatsData = !this.isEmptyStatsResults();
+  },
+  /**
+   * Want to display zeros for nuill values
+   * @param value
+   * @returns {*}
+   */
   zeroIfNone: function (value) {
-    if (value == null) {
-      return 0;
-    }
-    else {
-      return value;
-    }
+    return (value == null) ? 0 : value;
   },
+  /**
+   * Jesus Kit....not even going to try
+   *
+   * @returns {boolean|*}
+   */
   isEmptyStatsResults: function () {
     return (
       !this.stats.hasOwnProperty('id')
@@ -71,6 +84,11 @@ Polymer({
         )
       );
   },
+  /**
+   * Jesus Kit....not even going to try
+   *
+   * @returns {boolean|*}
+   */
   isEmptyHindexResults: function () {
     return (
       !this.hindex.hasOwnProperty('hindex_incites')
@@ -79,10 +97,6 @@ Polymer({
       && (!this.hindex.hasOwnProperty('hindex_scopus')
       || this.hindex.hasOwnProperty('hindex_scopus')
       && this.hindex.hindex_scopus == 0);
-  },
-  hostAttributes: {
-    'layout': '',
-    'center': ''
   },
   _computeHidden: function (hasHindexData, hasStatsData) {
     return hasHindexData || hasStatsData;

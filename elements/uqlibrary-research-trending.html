@@ -21,7 +21,7 @@ Example:
 
   <!-- Template -->
   <template>
-    <uqlibrary-api-academic-trending-publications id="api"></uqlibrary-api-academic-trending-publications>
+    <uqlibrary-api-academic-trending-publications id="api" on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
 
     <paper-card heading="Research guides" hidden$="{{hideNoResultsMessage}}">
       <div class="card-content" hidden$="{{isSearch}}">

@@ -9,8 +9,8 @@
     }
   </style>
   <template>
-    <uqlibrary-api-academic-hindex id="api"></uqlibrary-api-academic-hindex>
-    <uqlibrary-api-academic-stats id="apiStats"></uqlibrary-api-academic-stats>
+    <uqlibrary-api-academic-hindex id="api" on-uqlibrary-api-academic-hindex-loaded="hIndexLoaded"></uqlibrary-api-academic-hindex>
+    <uqlibrary-api-academic-stats id="apiStats" on-uqlibrary-api-academic-stats-loaded="academicStatsLoaded"></uqlibrary-api-academic-stats>
 
     <paper-card elevation="1" class="card" hidden$="{{_computeHidden(hasHindexData, hasStatsData)}}">
       <div class="card-actions" hidden$="{{isSearch}}">
