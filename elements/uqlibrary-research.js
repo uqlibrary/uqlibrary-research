@@ -32,12 +32,6 @@
         }
       }
     },
-    /**
-     * Show/hide main menu
-     * */
-    togglePanel: function () {
-      this.fire('uqlibrary-toggle-drawer');
-    },
     ready: function () {
       this.set('$.toolbar.appTitle', this.appTitle);
       if (this.autoload) {
@@ -158,8 +152,11 @@
         }
       }
     },
+    /**
+     * Show/hide main menu
+     * */
     toggleMenuDrawer: function () {
-      this.$.drawerPanel.togglePanel();
+      this.fire('uqlibrary-toggle-drawer');
     }
   });
 
