@@ -20,7 +20,9 @@ gulp serve
 
 If you still have the mock cookies in your browser, delete them via your browser.
 
-Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as a user with data you are interested in
+Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as a user with data you are interested in.
+
+Return to your demo page and you should be getting live data.
 
 
 ### Developing
