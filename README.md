@@ -5,8 +5,15 @@ uqlibrary-research displays various academic data to the end user
 Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-research).
 
 ### Getting Started
-```sh
+```
 npm install && bower install
+```
+
+### Running locally
+Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
+
+```
+gulp serve
 ```
 
 ### Developing
@@ -16,6 +23,6 @@ npm install && bower install
 
 ### Testing
 Tests are run using the Web Component Tester. Either navigate to /tests/index.html in a browser or using the command line:
-```sh
+```
 wct --local all
 ```
