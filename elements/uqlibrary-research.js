@@ -104,8 +104,8 @@
     performSearch: function (event) {
       this.$.toolbar.deactivateSearch();
       var userId = event.detail.searchTerm;
-      if (event.detail.searchItem) {
-        userId = event.detail.searchItem.username;
+      if (event.detail.searchTerm.username) {
+        userId = event.detail.searchTerm.username;
       }
       this.set('$.trendingElement.isSearch', true);
       this.set('$.trendingElement.user', {id: userId});
