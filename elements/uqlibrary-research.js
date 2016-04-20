@@ -102,15 +102,17 @@
      * @param event
      */
     performSearch: function (event) {
-      this.$.toolbar.deactivateSearch();
-      var userId = event.detail.searchTerm;
-      if (event.detail.searchTerm.username) {
-        userId = event.detail.searchTerm.username;
+      if (event.detail.hasOwnProperty('searchTerm') && event.detail.searchTerm) {
+        this.$.toolbar.deactivateSearch();
+        var userId = event.detail.searchTerm;
+        if (event.detail.searchTerm.username) {
+          userId = event.detail.searchTerm.username;
+        }
+        this.set('$.trendingElement.isSearch', true);
+        this.set('$.trendingElement.user', {id: userId});
+        this.set('$.metricsElement.isSearch', true);
+        this.set('$.metricsElement.user', {id: userId});
       }
-      this.set('$.trendingElement.isSearch', true);
-      this.set('$.trendingElement.user', {id: userId});
-      this.set('$.metricsElement.isSearch', true);
-      this.set('$.metricsElement.user', {id: userId});
     },
     /**
      * Something has been clicked
