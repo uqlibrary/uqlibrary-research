@@ -12,27 +12,27 @@
     <uqlibrary-api-academic-hindex id="api" on-uqlibrary-api-academic-hindex-loaded="hIndexLoaded"></uqlibrary-api-academic-hindex>
     <uqlibrary-api-academic-stats id="apiStats" on-uqlibrary-api-academic-stats-loaded="academicStatsLoaded"></uqlibrary-api-academic-stats>
 
-    <paper-card elevation="1" class="card" hidden$="{{_computeHidden(hasHindexData, hasStatsData)}}">
-      <div class="card-actions" hidden$="{{isSearch}}">
+    <paper-card elevation="1" class="card" hidden$="[[_computeHidden(hasHindexData, hasStatsData)]]">
+      <div class="card-actions" hidden$="[[isSearch]]">
         It looks like we don't have any publications that have any recorded citation counts yet.
       </div>
 
-      <div class="card-actions" hidden$="{{!isSearch}}">
+      <div class="card-actions" hidden$="[[!isSearch]]">
         It looks like we don't have any publications that have any recorded citation counts yet for your search
         criteria.
       </div>
 
-      <div class="card-actions caption" hidden$="{{isSearch}}">
+      <div class="card-actions caption" hidden$="[[isSearch]]">
         Your publications will appear here when someone else references or cites them.
         Your total score or citation count and the amount it's changed in the past year (Altmetrics) or month (Scopus
         &amp; WoS) will be displayed.
       </div>
     </paper-card>
 
-    <paper-card hidden$="{{_computeHidden2(hasHindexData, hasStatsData)}}" heading="{{metricsHeading}}" id="espace-pubs-container">
-      <a target="_blank" href$="{{_computeHref(user)}}">
+    <paper-card hidden$="[[_computeHidden2(hasHindexData, hasStatsData)]]" heading="[[metricsHeading]]" id="espace-pubs-container">
+      <a target="_blank" href$="[[_computeHref(user)]]">
         <div class="card-actions" id="espace-pubs">
-          <span class="espace" id="publications">{{zeroIfNone(stats.id.count)}}</span><span class="metric-text">eSpace Publications</span>
+          <span class="espace" id="publications">[[zeroIfNone(stats.id.count)]]</span><span class="metric-text">eSpace Publications</span>
         </div>
         </div>
       </a>
@@ -44,17 +44,17 @@
         </div>
 
         <div class="type-cites stat">
-          <div class="metrics-cites">{{zeroIfNone(hindex.hindex_incites)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(hindex.hindex_incites)]]</div>
           <div class="type-cites">h-index</div>
         </div>
 
         <div class="papers stat">
-          <div class="metrics-cites">{{zeroIfNone(stats.thomson_citation_count_i.count)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(stats.thomson_citation_count_i.count)]]</div>
           <div class="type-cites">Papers</div>
         </div>
 
         <div class="citations stat">
-          <div class="metrics-cites">{{zeroIfNone(stats.thomson_citation_count_i.sum)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(stats.thomson_citation_count_i.sum)]]</div>
           <div class="type-cites">Citations</div>
         </div>
 
@@ -67,17 +67,17 @@
         </div>
 
         <div class="type-cites stat">
-          <div class="metrics-cites">{{zeroIfNone(hindex.hindex_scopus)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(hindex.hindex_scopus)]]</div>
           <div class="type-cites">h-index</div>
         </div>
 
         <div class="papers stat">
-          <div class="metrics-cites">{{zeroIfNone(stats.scopus_citation_count_i.count)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(stats.scopus_citation_count_i.count)]]</div>
           <div class="type-cites">Papers</div>
         </div>
 
         <div class="citations stat">
-          <div class="metrics-cites">{{zeroIfNone(stats.scopus_citation_count_i.sum)}}</div>
+          <div class="metrics-cites">[[zeroIfNone(stats.scopus_citation_count_i.sum)]]</div>
           <div class="type-cites">Citations</div>
         </div>
 

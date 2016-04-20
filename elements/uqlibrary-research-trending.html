@@ -23,15 +23,15 @@ Example:
   <template>
     <uqlibrary-api-academic-trending-publications id="api" on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
 
-    <paper-card heading="Research guides" hidden$="{{hideNoResultsMessage}}">
-      <div class="card-content" hidden$="{{isSearch}}">
+    <paper-card heading="Research guides" hidden$="[[hideNoResultsMessage]]">
+      <div class="card-content" hidden$="[[isSearch]]">
         It looks like we can't find any of your publications that are trending at the moment.
       </div>
 
-      <div class="card-content" hidden$="{{!isSearch}}">
+      <div class="card-content" hidden$="[[!isSearch]]">
         It looks like we can't find any of publications that are trending at the moment for your search criteria.
       </div>
-      <div class="card-content caption" hidden$="{{isSearch}}">
+      <div class="card-content caption" hidden$="[[isSearch]]">
         Your publications will appear here when someone else references or cites them.
         Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus
         &amp;
@@ -39,24 +39,24 @@ Example:
       </div>
     </paper-card>
 
-    <template is="dom-repeat" items="{{cards}}" as="card">
+    <template is="dom-repeat" items="[[cards]]" as="card">
       <!--<template repeat="0">-->
-      <paper-card hidden$="{{_computeHidden(card, publications)}}" heading="{{card.title}}">
-        <template is="dom-repeat" items="{{_computeItems(card, publications)}}" as="pub" index-as="index">
+      <paper-card hidden$="[[_computeHidden(card, publications)]]" heading="[[card.title]]">
+        <template is="dom-repeat" items="[[_computeItems(card, publications)]]" as="pub" index-as="index">
           <div class="card-actions trending-line">
             <div class="title">
-              <a target="_blank" href$="{{_computeHref(pub)}}">
-                <div class="line1">{{pub.title}}</div>
-                <div class="authors caption"><span class="body1">{{formatAuthors(pub.authors)}}</span> —
-                  <span>{{showYear(pub.rek_date)}}</span>
+              <a target="_blank" href$="[[_computeHref(pub)]]">
+                <div class="line1">[[pub.title]]</div>
+                <div class="authors caption"><span class="body1">[[formatAuthors(pub.authors)]]</span> —
+                  <span>[[showYear(pub.rek_date)]]</span>
                 </div>
               </a>
             </div>
 
             <div class="num-cites stat">
-              <a target="_blank" href$="{{pub.citation_url}}">
-                <div class$="{{card.type}}">
-                  <span>{{pub.count}}</span><span class="plus" hidden$="{{_computeHidden2(pub)}}">{{differenceFormat(pub.difference)}}</span>
+              <a target="_blank" href$="[[pub.citation_url]]">
+                <div class$="[[card.type]]">
+                  <span>[[pub.count]]</span><span class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
                 </div>
               </a>
             </div>
@@ -66,7 +66,7 @@ Example:
 
     </template>
 
-    <paper-card hidden$="{{!hideNoResultsMessage}}" class="info-header">
+    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header">
       <!-- mimic the polymer structure to add icon -->
       <div class="header paper-card">
         <div class="title-text paper-card">
