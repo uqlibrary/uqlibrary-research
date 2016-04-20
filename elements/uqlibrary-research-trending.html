@@ -21,7 +21,8 @@ Example:
 
   <!-- Template -->
   <template>
-    <uqlibrary-api-academic-trending-publications id="api" on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
+    <uqlibrary-api-academic-trending-publications id="api"
+                                                  on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
 
     <paper-card heading="Research guides" hidden$="[[hideNoResultsMessage]]">
       <div class="card-content" hidden$="[[isSearch]]">
@@ -45,7 +46,7 @@ Example:
         <template is="dom-repeat" items="[[_computeItems(card, publications)]]" as="pub" index-as="index">
           <div class="card-actions trending-line">
             <div class="title">
-              <a target="_blank" href$="[[_computeHref(pub)]]">
+              <a target="_blank" href$="[[_computeHref(pub)]]" title="View [[pub.title]] on eSpace">
                 <div class="line1">[[pub.title]]</div>
                 <div class="authors caption"><span class="body1">[[formatAuthors(pub.authors)]]</span> —
                   <span>[[showYear(pub.rek_date)]]</span>
@@ -54,11 +55,18 @@ Example:
             </div>
 
             <div class="num-cites stat">
-              <a target="_blank" href$="[[pub.citation_url]]">
+              <template is="dom-if" if="[[pub.citation_url]]">
+                <a target="_blank" href$="[[pub.citation_url]]" title="[[card.title]] details for this publication">
+                  <div class$="[[card.type]]">
+                    <span>[[pub.count]]</span><span class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
+                  </div>
+                </a>
+              </template>
+              <template is="dom-if" if="[[!pub.citation_url]]">
                 <div class$="[[card.type]]">
                   <span>[[pub.count]]</span><span class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
                 </div>
-              </a>
+              </template>
             </div>
           </div>
         </template>

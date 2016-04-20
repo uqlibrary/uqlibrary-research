@@ -49,7 +49,7 @@
      */
     trendingPublicationsLoaded: function (e) {
       this.setPublications(e.detail);
-      this.hideNoResultsMessage = !this.isEmptyResults();
+      this.set('hideNoResultsMessage', !this.isEmptyResults());
     },
     /**
      * Add the pubs to the new value, fire loaded event
@@ -57,7 +57,7 @@
      * @param val
      */
     setPublications: function(val) {
-      this.publications = val;
+      this.set('publications', val);
       this.fire('uqlibrary-research-trending-loaded', val);
     },
     /**
