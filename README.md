@@ -7,20 +7,23 @@ Example of full documentation can be found at [GitHub Pages](http://uqlibrary.gi
 ### Getting Started
 ```
 npm install && bower install
-```
-
-### Running with live data locally
-Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
-
-Comment out the cookies which control mock data in demo.html (or create a new file)
-
-```
 gulp serve
 ```
 
+### Running with live data locally
+
+Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
+
+```
+gulp live
+```
+
+This comments out the calls to create the Mock cookies in index.html.  Note the browser often caches the html so 
+check the source for the calls and do a hard refresh if they aren't commented out.
+
 If you still have the mock cookies in your browser, delete them via your browser.
 
-You can look at other users data via the search function.
+If you don't have data, you can search for other users via the search function.
 
 
 ### Developing
