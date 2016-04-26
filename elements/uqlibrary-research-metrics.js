@@ -85,7 +85,7 @@ Polymer({
       );
   },
   /**
-   * Jesus Kit....not even going to try
+   * Meh...
    *
    * @returns {boolean|*}
    */
@@ -98,13 +98,21 @@ Polymer({
       || this.hindex.hasOwnProperty('hindex_scopus')
       && this.hindex.hindex_scopus == 0);
   },
-  _computeHidden: function (hasHindexData, hasStatsData) {
+  /**
+   * Is all the data loaded
+   *
+   * @param hasHindexData
+   * @param hasStatsData
+   * @returns {*}
+   * @private
+   */
+  _dataLoaded: function (hasHindexData, hasStatsData) {
     return hasHindexData || hasStatsData;
   },
-  _computeHidden2: function (hasHindexData, hasStatsData) {
+  _dataNotLoaded: function (hasHindexData, hasStatsData) {
     return !hasHindexData && !hasStatsData;
   },
   _computeHref: function (user) {
-    return 'https://espace.library.uq.edu.au/' + user.id;
+    return 'https://espace.library.uq.edu.au/' + encodeURIComponent(user.id);
   }
 });
