@@ -51,7 +51,6 @@ gulp.task("live", [], function () {
   browsersync(browsersyncConfig);
 });
 
-
 // Build production files, the default task
 gulp.task("default", ["serve"], function (cb) {
 });
