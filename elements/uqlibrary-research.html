@@ -37,12 +37,19 @@ Example:
     <!--uqlibrary-ga id="ga" appname="Research"></uqlibrary-ga-->
 
     <div id="content" class="fit" style="overflow: scroll;">
-      <uqlibrary-toolbar id="toolbar"
-                         on-uqlibrary-toolbar-menu-clicked="toggleMenuDrawer"
+      <uqlibrary-toolbar on-uqlibrary-toolbar-menu-clicked="toggleMenuDrawer"
+                         on-search-term-changed="loadAutosuggest"
                          on-uqlibrary-toolbar-search-submitted="performSearch"
                          on-uqlibrary-toolbar-link-clicked="appLinkClicked"
-                         on-uqlibrary-toolbar-search-value-changed="loadAutosuggest"
-                         search-placeholder-text="Search for a researcher by name or username"></uqlibrary-toolbar>
+                         item-label = "name"
+                         enable-search="true"
+                         enable-menu="[[!standAlone]]"
+                         item-label="text"
+                         header-title="Research"
+                         id="toolbar"
+                         search-placeholder-text="Search for a researcher by name or username"
+      >
+      </uqlibrary-toolbar>
 
       <paper-tabs id="tabs" selected="{{selectedTab}}">
 
