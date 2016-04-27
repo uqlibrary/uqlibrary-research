@@ -160,7 +160,7 @@
           }
           else {
             this.set('$.toolbar.headerTitle',
-              author.aut_title + ' ' + author.aut_fname + ' ' + author.aut_lname + '\'s Research');
+              author.aut_title + ' ' + author.aut_fname + ' ' + author.aut_lname + '\'s research');
           }
         }
         else if (this.$.toolbar.searchFieldValue) {
