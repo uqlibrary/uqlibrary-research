@@ -49,7 +49,7 @@ Polymer({
     this.hasStatsData = !this.isEmptyStatsResults();
   },
   /**
-   * Want to display zeros for nuill values
+   * Want to display zeros for null values
    * @param value
    * @returns {*}
    */

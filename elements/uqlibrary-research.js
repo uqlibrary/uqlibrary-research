@@ -54,11 +54,11 @@
     accountLoaded: function (e) {
       if (e.detail.hasSession) {
         if (e.detail.classes) {
-          this.user = e.detail;
-          this.$.trendingElement.user = this.user;
-          this.$.trendingElement.isSearch = false;
-          this.$.metricsElement.user = this.user;
-          this.$.metricsElement.isSearch = false;
+          this.set('user', e.detail);
+          this.set('$.trendingElement.user', this.user);
+          this.set('$.metricsElement.isSearch', false);
+          this.set('$.metricsElement.user', this.user);
+          this.set('$.trendingElement.isSearch', false);
         }
       }
       else {
