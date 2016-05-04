@@ -38,21 +38,24 @@ Example:
 
     <div id="content" class="fit" style="overflow: scroll;">
       <uqlibrary-toolbar id="toolbar"
+                         header-title="Research"
+                         enable-search="true"
+                         enable-menu="true"
                          on-uqlibrary-toolbar-menu-clicked="toggleMenuDrawer"
                          on-uqlibrary-toolbar-search-submitted="performSearch"
                          on-uqlibrary-toolbar-link-clicked="appLinkClicked"
-                         on-uqlibrary-toolbar-search-value-changed="loadAutosuggest"
+                         on-search-term-changed="loadAutosuggest"
                          search-placeholder-text="Search for a researcher by name or username"></uqlibrary-toolbar>
 
       <paper-tabs id="tabs" selected="{{selectedTab}}">
 
-        <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
+        <paper-tab name="Trending" id="tabTrending" aria-label="Trending research">
           <div class="menu">
             <div class="tabTitle layout vertical center">Trending Publications</div>
           </div>
         </paper-tab>
 
-        <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
+        <paper-tab name="Metrics" id="tabMetrics" aria-label="Research metrics">
           <div class="menu">
             <div class="tabTitle layout vertical center">Metrics</div>
           </div>
