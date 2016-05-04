@@ -15,6 +15,7 @@ Example:
     :host {
       @apply(--layout-vertical);
       @apply(--layout-center);
+      padding: 10px;
     }
   </style>
 
@@ -24,15 +25,16 @@ Example:
     <uqlibrary-api-academic-trending-publications id="api"
                                                   on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
 
-    <paper-card heading="Research guides" hidden$="[[hideNoResultsMessage]]">
-      <div class="card-content" hidden$="[[isSearch]]">
-        It looks like we can't find any of your publications that are trending at the moment.
+    <paper-card hidden$="[[hideNoResultsMessage]]" elevation="2">
+      <div class="header paper-card">
+        <div class="title-text paper-card" hidden$="[[isSearch]]">
+          It looks like we can't find any of your publications that are trending at the moment.
+        </div>
+        <div class="title-text paper-card" hidden$="[[!isSearch]]">
+          It looks like we can't find any of publications that are trending at the moment for your search criteria.
+        </div>
       </div>
-
-      <div class="card-content" hidden$="[[!isSearch]]">
-        It looks like we can't find any of publications that are trending at the moment for your search criteria.
-      </div>
-      <div class="card-content caption" hidden$="[[isSearch]]">
+      <div class="card-content body1" hidden$="[[isSearch]]">
         Your publications will appear here when someone else references or cites them.
         Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus
         &amp;
@@ -42,7 +44,7 @@ Example:
 
     <template is="dom-repeat" items="[[cards]]" as="card">
       <!--<template repeat="0">-->
-      <paper-card hidden$="[[_computeHidden(card, publications)]]" heading="[[card.title]]">
+      <paper-card hidden$="[[_computeHidden(card, publications)]]" heading="[[card.title]]" elevation="2">
         <template is="dom-repeat" items="[[_computeItems(card, publications)]]" as="pub" index-as="index">
           <div class="card-actions trending-line">
             <div class="title">
@@ -74,7 +76,7 @@ Example:
 
     </template>
 
-    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header">
+    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header" elevation="2">
       <!-- mimic the polymer structure to add icon -->
       <div class="header paper-card">
         <div class="title-text paper-card">
@@ -94,7 +96,7 @@ Example:
       </div>
     </paper-card>
 
-    <paper-card heading="Research guides">
+    <paper-card heading="Research guides" elevation="2">
       <div class="card-actions">
         <a href="http://guides.library.uq.edu.au/getting-published">
           <iron-icon class="link" icon="description" aria-label=""></iron-icon>
@@ -109,7 +111,6 @@ Example:
       </div>
     </paper-card>
 
-    </div>
   </template>
 
   <!-- Location of the script -->

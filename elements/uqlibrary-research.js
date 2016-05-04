@@ -5,9 +5,17 @@
   Polymer({
     is: 'uqlibrary-research',
     properties: {
-      appTitle: {
+      /**
+       * Whether to show the hamburger menu
+       */
+      standAlone: {
+        type: Object,
+        value: true
+      },
+
+      headerTitle: {
         type: String,
-        value: 'My Research'
+        value: 'My research'
       },
       // whether the account should autoload
       autoload: {
@@ -33,7 +41,7 @@
       }
     },
     ready: function () {
-      this.set('$.toolbar.appTitle', this.appTitle);
+      this.set('$.toolbar.headerTitle', this.headerTitle);
       if (this.autoload) {
         this.$.account.get();
       }
@@ -93,7 +101,9 @@
           item.recent = false;
           suggestions.push(item);
         });
-        this.set('$.toolbar.suggestions', suggestions);
+        this.$.toolbar.suggestions = suggestions;
+
+        // this.set('$.toolbar.suggestions', suggestions);
       }
     },
     /**
@@ -102,16 +112,21 @@
      * @param event
      */
     performSearch: function (event) {
-      if (event.detail.hasOwnProperty('searchTerm') && event.detail.searchTerm) {
-        this.$.toolbar.deactivateSearch();
-        var userId = event.detail.searchTerm;
-        if (event.detail.searchTerm.username) {
-          userId = event.detail.searchTerm.username;
+      if (typeof(event.detail.searchItem) !== 'undefined') {
+
+        var userId = event.detail.searchItem;
+
+        if (event.detail.searchItem.username) {
+          userId = event.detail.searchItem.username;
         }
+
         this.set('$.trendingElement.isSearch', true);
         this.set('$.trendingElement.user', {id: userId});
         this.set('$.metricsElement.isSearch', true);
         this.set('$.metricsElement.user', {id: userId});
+
+        this.$.toolbar.searchTerm = '';
+        this.$.toolbar.appLinks = [ { label: 'Clear search', action: 'clear' } ];
       }
     },
     /**
@@ -120,9 +135,11 @@
      * @param e
      */
     appLinkClicked: function (e) {
-      if (e.detail === '#ClearSearch') {
-        this.$.toolbar.clearSearchForm();
-        this.set('$.toolbar.appTitle', this.appTitle);
+
+      if (e.detail.action === 'clear') {
+        this.$.toolbar.appLinks = [];
+
+        this.set('$.toolbar.headerTitle', this.headerTitle);
         this.set('$.trendingElement.isSearch', false);
         this.set('$.trendingElement.user', this.user);
         this.set('$.metricsElement.isSearch', false);
@@ -139,18 +156,18 @@
         if (e.detail && e.detail.author_details && e.detail.author_details.length > 0) {
           var author = e.detail.author_details[0];
           if (this.user.id == author.aut_org_username) {
-            this.set('$.toolbar.appTitle', this.appTitle);
+            this.set('$.toolbar.headerTitle', this.headerTitle);
           }
           else {
-            this.set('$.toolbar.appTitle',
-              author.aut_title + ' ' + author.aut_fname + ' ' + author.aut_lname + '\'s Research');
+            this.set('$.toolbar.headerTitle',
+              author.aut_title + ' ' + author.aut_fname + ' ' + author.aut_lname + '\'s research');
           }
         }
         else if (this.$.toolbar.searchFieldValue) {
-          this.set('$.toolbar.appTitle', 'No Results Found');
+          this.set('$.toolbar.headerTitle', 'No Results Found');
         }
         else {
-          this.set('$.toolbar.appTitle', this.appTitle);
+          this.set('$.toolbar.headerTitle', this.headerTitle);
         }
       }
     },
