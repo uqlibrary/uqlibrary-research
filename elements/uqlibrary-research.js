@@ -97,7 +97,7 @@
       var suggestions = [];
       if (event.detail.length > 0) {
         event.detail.forEach(function (item) {
-          item.name = item.title + ' ' + item.given_name + ' ' + item.family_name + ' (' + item.username + ')';
+          item.text = item.title + ' ' + item.given_name + ' ' + item.family_name + ' (' + item.username + ')';
           item.recent = false;
           suggestions.push(item);
         });
