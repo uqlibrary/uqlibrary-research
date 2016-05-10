@@ -27,6 +27,7 @@
   "ignore": [],
   "resolutions": {
     "uqlibrary-autosuggest-input": "v1.0.6",
-    "uqlibrary-iron-dropdown": "v1.2.2"
+    "uqlibrary-iron-dropdown": "v1.2.2",
+    "uqlibrary-api": "^1.0.5"
   }
 }
