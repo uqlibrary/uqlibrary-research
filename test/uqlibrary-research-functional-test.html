@@ -42,7 +42,7 @@
     test('it should have Trending Publications tab active', function (done) {
       element.$.account.addEventListener('uqlibrary-api-account-loaded', function (e) {
         var el = element.querySelector('paper-tab.iron-selected');
-        expect(el.textContent).to.match(/^\s*Trending Publications\s*$/);
+        expect(el.textContent).to.match(/^\s*TRENDING PUBLICATIONS\s*$/);
         done();
       });
     });
@@ -52,7 +52,7 @@
         var el = element.querySelector('paper-tab:not(.iron-selected)');
         el.click();
         var sel = element.querySelector('paper-tab.iron-selected');
-        expect(sel.textContent).to.match(/^\s*Metrics\s*$/);
+        expect(sel.textContent).to.match(/^\s*METRICS\s*$/);
         done();
       });
     });
