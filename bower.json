@@ -14,15 +14,19 @@
     "moment": "moment/moment#^2.10.3",
     "neon-animation": "polymerelements/neon-animation#^1.0.0",
     "paper-elements": "PolymerElements/paper-elements#^1.0.0",
-    "polymer": "Polymer/polymer#^1.3.1",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api#^1.0.0",
-    "uqlibrary-ga": "uqlibrary/uqlibrary-ga#^1.0.0",
+    "polymer": "Polymer/polymer#^1.4",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api#^1.0.5",
+    "uqlibrary-ga": "uqlibrary/uqlibrary-ga#^1.0.3",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#^1.0.0",
-    "uqlibrary-toolbar": "uqlibrary/uqlibrary-toolbar#v1.0.4"
+    "uqlibrary-toolbar": "uqlibrary/uqlibrary-toolbar#v1.0.7"
   },
   "devDependencies": {
     "web-component-tester": "^4.2.2",
     "test-fixture": "PolymerElements/test-fixture#^1.1.0"
   },
-  "ignore": []
+  "ignore": [],
+  "resolutions": {
+    "uqlibrary-autosuggest-input": "v1.0.6",
+    "uqlibrary-iron-dropdown": "v1.2.2"
+  }
 }

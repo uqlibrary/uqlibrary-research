@@ -12,15 +12,15 @@
           return [
             {
               'type': 'altmetric',
-              'title': 'Altmetric Score'
+              'title': 'Altmetric score'
             },
             {
               'type': 'thomson',
-              'title': 'Web of Science Citation Count'
+              'title': 'Web of Science citation count'
             },
             {
               'type': 'scopus',
-              'title': 'Scopus Citation Count'
+              'title': 'Scopus citation count'
             }
           ];
         }
