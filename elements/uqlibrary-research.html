@@ -41,10 +41,9 @@ Example:
                          on-search-term-changed="loadAutosuggest"
                          on-uqlibrary-toolbar-search-submitted="performSearch"
                          on-uqlibrary-toolbar-link-clicked="appLinkClicked"
-                         item-label = "name"
                          enable-search="true"
                          enable-menu="[[!standAlone]]"
-                         item-label="text"
+                         item-label="name"
                          header-title="Research"
                          id="toolbar"
                          search-placeholder-text="Search for a researcher by name or username"
@@ -53,13 +52,13 @@ Example:
 
       <paper-tabs id="tabs" selected="{{selectedTab}}">
 
-        <paper-tab name="Trending" id="tabTrending" aria-label="My trending research">
+        <paper-tab name="Trending" id="tabTrending" aria-label="Trending research">
           <div class="menu">
             <div class="tabTitle layout vertical center">TRENDING PUBLICATIONS</div>
           </div>
         </paper-tab>
 
-        <paper-tab name="Metrics" id="tabMetrics" aria-label="My research metrics">
+        <paper-tab name="Metrics" id="tabMetrics" aria-label="Research metrics">
           <div class="menu">
             <div class="tabTitle layout vertical center">METRICS</div>
           </div>

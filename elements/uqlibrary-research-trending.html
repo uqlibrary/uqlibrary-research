@@ -60,13 +60,13 @@ Example:
               <template is="dom-if" if="[[pub.citation_url]]">
                 <a target="_blank" href$="[[pub.citation_url]]" title="[[card.title]] details for this publication">
                   <div class$="[[card.type]]">
-                    <span>[[pub.count]]</span><span class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
+                    <span aria-label$="[[card.title]] [[pub.count]]">[[pub.count]]</span><span aria-label$="Statistic difference [[differenceFormat(pub.difference)]]" class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
                   </div>
                 </a>
               </template>
               <template is="dom-if" if="[[!pub.citation_url]]">
                 <div class$="[[card.type]]">
-                  <span>[[pub.count]]</span><span class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
+                  <span aria-label$="[[card.title]] [[pub.count]]">[[pub.count]]</span><span aria-label$="Statistic difference [[differenceFormat(pub.difference)]]]" class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
                 </div>
               </template>
             </div>
