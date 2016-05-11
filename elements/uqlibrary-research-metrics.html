@@ -98,22 +98,18 @@
       </div>
 
       <div class="card-content" id="scopus-stats">
-
         <div class="metrics-type">
           Scopus
         </div>
-
         <div class="metrics-container">
           <div class="type-cites stat">
             <div class="metrics-cites">[[zeroIfNone(hindex.hindex_scopus)]]</div>
             <div class="type-cites">h-index</div>
           </div>
-
           <div class="papers stat">
             <div class="metrics-cites">[[zeroIfNone(stats.scopus_citation_count_i.count)]]</div>
             <div class="type-cites">papers</div>
           </div>
-
           <div class="citations stat">
             <div class="metrics-cites">[[zeroIfNone(stats.scopus_citation_count_i.sum)]]</div>
             <div class="type-cites">citations</div>
@@ -124,21 +120,21 @@
 
     <paper-card heading="Research guides" elevation="2">
       <a href="http://guides.library.uq.edu.au/research_impact/author-identifiers" target="_blank">
-        <paper-icon-item>
+        <paper-icon-item class="border">
           <iron-icon icon="assignment-ind" item-icon></iron-icon>
           Guide to author identifiers
         </paper-icon-item>
       </a>
 
       <a href="http://guides.library.uq.edu.au/research_impact" target="_blank">
-        <paper-icon-item>
+        <paper-icon-item class="border">
           <iron-icon icon="trending-up" item-icon></iron-icon>
           Guide to research output &amp; impact
         </paper-icon-item>
       </a>
 
       <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-        <paper-icon-item>
+        <paper-icon-item class="border">
           <iron-icon icon="arrow-forward" item-icon></iron-icon>
           See all research support
         </paper-icon-item>
