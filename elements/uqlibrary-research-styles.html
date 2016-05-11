@@ -25,11 +25,8 @@
         padding: 0;
       }
 
-      #scopus-stats > div.metrics-type,
-      #wos-stats > div.metrics-type {
+      #scopus-stats > div.metrics-type, #wos-stats > div.metrics-type {
         @apply(--layout-flex);
-        @apply(--layout-vertical);
-        @apply(--layout-self-center);
         padding-left: 16px;
         font-size: 16px;
         font-weight: 400;
@@ -44,8 +41,7 @@
         padding-bottom: 5px;
       }
 
-      #scopus-stats div.metrics-cites,
-      #wos-stats div.metrics-cites {
+      div.metrics-container div.metrics-cites {
         color: #333;
         padding: 0.4em 0 0.1em 0;
         font-size: 24px;
