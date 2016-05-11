@@ -24,5 +24,9 @@
     "web-component-tester": "^4.2.2",
     "test-fixture": "PolymerElements/test-fixture#^1.1.0"
   },
-  "ignore": []
+  "ignore": [],
+  "resolutions": {
+    "uqlibrary-autosuggest-input": "v1.0.8",
+    "uqlibrary-api": "v1.0.5"
+  }
 }

@@ -76,14 +76,7 @@ Example:
 
     </template>
 
-    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header" elevation="2">
-      <!-- mimic the polymer structure to add icon -->
-      <div class="header paper-card">
-        <div class="title-text paper-card">
-          <iron-icon icon="info"></iron-icon>
-          About these metrics
-        </div>
-      </div>
+    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header" elevation="2" heading="About these metrics">
       <div class="card-content">
         For the above metrics, the larger number is the total current citation count,
         and the + (plus) value indicates how much the citation count has changed in the last month.
@@ -97,18 +90,19 @@ Example:
     </paper-card>
 
     <paper-card heading="Research guides" elevation="2">
-      <div class="card-actions">
-        <a href="http://guides.library.uq.edu.au/getting-published">
-          <iron-icon class="link" icon="description" aria-label=""></iron-icon>
+      <a href="http://guides.library.uq.edu.au/getting-published" target="_blank">
+        <paper-icon-item>
+          <iron-icon icon="description" item-icon></iron-icon>
           Guide to Getting Published
-        </a>
-      </div>
-      <div class="card-actions">
-        <a href="https://www.library.uq.edu.au/research-support" target="_blank">
-          <iron-icon class="link" icon="arrow-forward" aria-label=""></iron-icon>
+        </paper-icon-item>
+      </a>
+
+      <a href="https://web.library.uq.edu.au/research-support" target="_blank">
+        <paper-icon-item>
+          <iron-icon icon="arrow-forward" item-icon></iron-icon>
           See all research support
-        </a>
-      </div>
+        </paper-icon-item>
+      </a>
     </paper-card>
 
   </template>
