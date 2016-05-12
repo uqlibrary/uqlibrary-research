@@ -126,25 +126,21 @@
         this.set('$.metricsElement.user', {id: userId});
 
         this.$.toolbar.searchTerm = '';
-        this.$.toolbar.appLinks = [ { label: 'Clear search', action: 'clear' } ];
+        this.$.toolbar.enableSearchClear = true;
       }
     },
     /**
-     * Something has been clicked
-     *
+     * Clear Search clicked
      * @param e
      */
-    appLinkClicked: function (e) {
+    _clearSearch: function (e) {
+      this.$.toolbar.enableSearchClear = false;
 
-      if (e.detail.action === 'clear') {
-        this.$.toolbar.appLinks = [];
-
-        this.set('$.toolbar.headerTitle', this.headerTitle);
-        this.set('$.trendingElement.isSearch', false);
-        this.set('$.trendingElement.user', this.user);
-        this.set('$.metricsElement.isSearch', false);
-        this.set('$.metricsElement.user', this.user);
-      }
+      this.set('$.toolbar.headerTitle', this.headerTitle);
+      this.set('$.trendingElement.isSearch', false);
+      this.set('$.trendingElement.user', this.user);
+      this.set('$.metricsElement.isSearch', false);
+      this.set('$.metricsElement.user', this.user);
     },
     /**
      * Callback for trending
