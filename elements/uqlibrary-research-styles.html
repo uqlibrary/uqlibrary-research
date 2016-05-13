@@ -25,35 +25,22 @@
         padding: 0;
       }
 
-      #scopus-stats > div.metrics-type, #wos-stats > div.metrics-type {
-        @apply(--layout-flex);
-        padding-left: 16px;
-        font-size: 16px;
-        font-weight: 400;
-      }
-
       div.stat {
         @apply(--layout-vertical);
         @apply(--layout-center);
         @apply(--layout-center-justified);
-        background-color: #FAFAFA;
-        border-left: 1px solid #ccc;
+        background-color: var(--secondary-color-light);
+        border-left: 1px solid var(--border-color);
         padding-bottom: 5px;
       }
 
       div.metrics-container div.metrics-cites {
-        color: #333;
+        color: var(--secondary-color-dark);
         padding: 0.4em 0 0.1em 0;
         font-size: 24px;
         font-weight: 400;
         width: 3em;
         text-align: center;
-      }
-
-      #scopus-stats div.type-cites,
-      #wos-stats div.type-cites {
-        color: #333;
-        font-size: 11px;
       }
 
       div.trending-line a {
@@ -82,7 +69,7 @@
       }
 
       div.trending-line div.num-cites span.plus {
-        color: #333;
+        color: var(--secondary-color-dark);
         font-size: 14px;
         vertical-align: super;
         padding: 5px;

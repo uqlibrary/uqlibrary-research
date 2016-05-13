@@ -8,6 +8,11 @@
       padding: 10px;
     }
 
+    #scopus-stats div.type-cites,
+    #wos-stats div.type-cites {
+      color: var(--secondary-color-dark);
+      font-size: 11px;
+    }
     .card-content {
       border: 1px solid var(--border-color);
     }
@@ -16,12 +21,29 @@
       @apply(--layout-horizontal);
     }
 
+    .metrics-type {
+      padding-left: 16px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
     @media all and (max-width: 400px) {
+
+      .card-content {
+        border-width: 1px 0 0 0;
+      }
+
+      div.stat {
+        border-width: 0;
+      }
+
       #scopus-stats, #wos-stats {
         @apply(--layout-vertical);
       }
 
       .metrics-container {
+        border: 1px solid var(--border-color);
+        border-width: 1px 0 0 0;
         width: 100%;
       }
 
@@ -35,6 +57,11 @@
     }
 
     @media all and (min-width: 400px) {
+
+      .metrics-type {
+        @apply(--layout-flex);
+      }
+
       .metrics-container {
         @apply(--layout-self-end);
       }
