@@ -15,7 +15,7 @@
 
       headerTitle: {
         type: String,
-        value: 'My research'
+        value: 'Publication metrics'
       },
       // whether the account should autoload
       autoload: {
