@@ -48,7 +48,7 @@ Example:
         <template is="dom-repeat" items="[[_computeItems(card, publications)]]" as="pub" index-as="index">
           <div class="card-actions trending-line">
             <div class="title">
-              <a target="_blank" href$="[[_computeHref(pub)]]" title="View [[pub.title]] on eSpace">
+              <a href$="[[_computeHref(pub)]]" title="View [[pub.title]] on eSpace">
                 <div class="line1">[[pub.title]]</div>
                 <div class="authors caption"><span class="body1">[[formatAuthors(pub.authors)]]</span> —
                   <span>[[showYear(pub.rek_date)]]</span>
@@ -58,7 +58,7 @@ Example:
 
             <div class="num-cites stat">
               <template is="dom-if" if="[[pub.citation_url]]">
-                <a target="_blank" href$="[[pub.citation_url]]" title="[[card.title]] details for this publication">
+                <a href$="[[pub.citation_url]]" title="[[card.title]] details for this publication">
                   <div class$="[[card.type]]">
                     <span aria-label$="[[card.title]] [[pub.count]]">[[pub.count]]</span><span aria-label$="Statistic difference [[differenceFormat(pub.difference)]]" class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
                   </div>
@@ -90,21 +90,21 @@ Example:
     </paper-card>
 
     <paper-card heading="Research guides" elevation="2">
-      <a href="http://guides.library.uq.edu.au/getting-published" target="_blank">
+      <a href="http://guides.library.uq.edu.au/getting-published">
         <paper-icon-item class="border">
           <iron-icon icon="description" item-icon></iron-icon>
           Guide to getting published
         </paper-icon-item>
       </a>
 
-      <a href="http://guides.library.uq.edu.au/open-access" target="_blank">
+      <a href="http://guides.library.uq.edu.au/open-access">
         <paper-icon-item class="border">
           <iron-icon icon="description" item-icon></iron-icon>
           Guide to open access
         </paper-icon-item>
       </a>
 
-      <a href="https://web.library.uq.edu.au/research-support" target="_blank">
+      <a href="https://web.library.uq.edu.au/research-support">
         <paper-icon-item class="border">
           <iron-icon icon="arrow-forward" item-icon></iron-icon>
           See all research support
