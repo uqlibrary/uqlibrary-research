@@ -1,5 +1,8 @@
 # uqlibrary-research
 
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-research.svg)](https://david-dm.org/uqlibrary/uqlibrary-research)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-research/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-research?type=dev)
+
 uqlibrary-research displays various academic data to the end user
 
 Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-research).
