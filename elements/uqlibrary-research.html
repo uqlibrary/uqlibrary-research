@@ -17,19 +17,19 @@ Example:
 @demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-research">
-  <!-- All element styles -->
-  <style is="custom-style" include="research-styles">
-    :host {
-      @apply(--uql-app-host);
-    }
-
-    #content {
-      overflow: scroll;
-    }
-  </style>
-
   <!-- Template -->
   <template>
+    <!-- All element styles -->
+    <style is="custom-style" include="research-styles">
+      :host {
+        @apply(--uql-app-host);
+      }
+
+      #content {
+        overflow: scroll;
+      }
+    </style>
+
     <uqlibrary-api-account id="account" on-uqlibrary-api-account-loaded="accountLoaded"></uqlibrary-api-account>
     <uqlibrary-api-authors-search id="authorsSearchApi"
                                   on-uqlibrary-api-authors-search-loaded="autosuggestLoaded"></uqlibrary-api-authors-search>

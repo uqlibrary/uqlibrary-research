@@ -11,17 +11,17 @@ Example:
 @demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-research-trending">
-  <style is="custom-style" include="research-styles">
-    :host {
-      @apply(--layout-vertical);
-      @apply(--layout-center);
-      padding: 10px;
-    }
-  </style>
-
-
   <!-- Template -->
   <template>
+    <style is="custom-style" include="research-styles">
+      :host {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        padding: 10px;
+      }
+    </style>
+
+
     <uqlibrary-api-academic-trending-publications id="api"
                                                   on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
 
