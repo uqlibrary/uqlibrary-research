@@ -7,9 +7,9 @@
       }
 
       #espace-pubs {
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        @apply(--layout-center-justified);
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --layout-center-justified;
       }
 
       #publications {
@@ -21,14 +21,14 @@
       div.trending-line,
       #scopus-stats,
       #wos-stats {
-        @apply(--layout-horizontal);
+        @apply --layout-horizontal;
         padding: 0;
       }
 
       div.stat {
-        @apply(--layout-vertical);
-        @apply(--layout-center);
-        @apply(--layout-center-justified);
+        @apply --layout-vertical;
+        @apply --layout-center;
+        @apply --layout-center-justified;
         background-color: var(--secondary-color-light);
         border-left: 1px solid var(--border-color);
         padding-bottom: 5px;
@@ -48,7 +48,7 @@
       }
 
       div.trending-line div.title {
-        @apply(--layout-flex);
+        @apply --layout-flex;
         padding: 12px;
         font-size: 16px;
         font-weight: 400;

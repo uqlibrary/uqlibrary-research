@@ -4,8 +4,8 @@
   <template>
     <style is="custom-style" include="research-styles common-styles">
       :host {
-        @apply(--layout-vertical);
-        @apply(--layout-center);
+        @apply --layout-vertical;
+        @apply --layout-center;
         padding: 10px;
       }
 
@@ -19,7 +19,7 @@
       }
 
       .metrics-container {
-        @apply(--layout-horizontal);
+        @apply --layout-horizontal;
       }
 
       .metrics-type {
@@ -39,7 +39,7 @@
         }
 
         #scopus-stats, #wos-stats {
-          @apply(--layout-vertical);
+          @apply --layout-vertical;
         }
 
         .metrics-container {
@@ -49,7 +49,7 @@
         }
 
         .metrics-container > div {
-          @apply(--layout-flex);
+          @apply --layout-flex;
         }
 
         .metrics-type {
@@ -60,16 +60,16 @@
       @media all and (min-width: 400px) {
 
         .metrics-type {
-          @apply(--layout-flex);
+          @apply --layout-flex;
         }
 
         .metrics-container {
-          @apply(--layout-self-end);
+          @apply --layout-self-end;
         }
 
         .metrics-type {
-          @apply(--layout-vertical);
-          @apply(--layout-self-center);
+          @apply --layout-vertical;
+          @apply --layout-self-center;
         }
       }
     </style>
