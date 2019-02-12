@@ -1,5 +1,6 @@
 # uqlibrary-research
 
+[![Codeship Status for uqlibrary/uqlibrary-research](https://app.codeship.com/projects/130bf510-b406-0132-3b74-5e0c22399d4c/status?branch=polymer1.0)](https://app.codeship.com/projects/70365)
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-research.svg)](https://david-dm.org/uqlibrary/uqlibrary-research)
 [![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-research/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-research?type=dev)
 
