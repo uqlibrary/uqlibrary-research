@@ -11,7 +11,7 @@ Demo is [here](http://uqlibrary.github.io/uqlibrary-research/uqlibrary-research/
 ## Getting Started
 
 ```sh
-npm install -g bower gulp-cli web-component-tester
+npm install -g gulp-cli bower web-component-tester polymer-cli
 npm install
 bower install
 ```
