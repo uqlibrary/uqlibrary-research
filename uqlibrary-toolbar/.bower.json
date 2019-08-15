@@ -1,0 +1,37 @@
+{
+  "name": "uqlibrary-toolbar",
+  "version": "1.1.5",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "private": true,
+  "main": "elements/uqlibrary-toolbar.html",
+  "dependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.8",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "polymer": "Polymer/polymer#^1.11.3",
+    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input",
+    "uqlibrary-api": "uqlibrary/uqlibrary-api",
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles"
+  },
+  "devDependencies": {
+    "web-component-tester": "*",
+    "test-fixture": "PolymerElements/test-fixture#^1.1.2"
+  },
+  "resolutions": {
+    "test-fixture": "^1.1.2"
+  },
+  "homepage": "https://github.com/uqlibrary/uqlibrary-toolbar",
+  "_release": "1.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.5",
+    "commit": "af301776c1e7f1123f38a7f3c1cd0afce51cafdc"
+  },
+  "_source": "https://github.com/uqlibrary/uqlibrary-toolbar.git",
+  "_target": "*",
+  "_originalSource": "uqlibrary/uqlibrary-toolbar"
+}

@@ -1,0 +1,118 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-research-trending>` is an overview for users courses and academic output
+
+Example:
+
+    <uqlibrary-research-trending></uqlibrary-research-trending>
+
+@demo
+-->
+<dom-module id="uqlibrary-research-trending">
+  <!-- Template -->
+  <template>
+    <style is="custom-style" include="research-styles">
+      :host {
+        @apply --layout-vertical;
+        @apply --layout-center;
+        padding: 10px;
+      }
+    </style>
+
+
+    <uqlibrary-api-academic-trending-publications id="api"
+                                                  on-uqlibrary-api-academic-trending-publication="trendingPublicationsLoaded"></uqlibrary-api-academic-trending-publications>
+
+    <paper-card hidden$="[[hideNoResultsMessage]]" elevation="2">
+      <div class="header paper-card">
+        <div class="title-text paper-card" hidden$="[[isSearch]]">
+          It looks like we can't find any of your publications that are trending at the moment.
+        </div>
+        <div class="title-text paper-card" hidden$="[[!isSearch]]">
+          It looks like we can't find any of publications that are trending at the moment for your search criteria.
+        </div>
+      </div>
+      <div class="card-content body1" hidden$="[[isSearch]]">
+        Your publications will appear here when someone else references or cites them.
+        Your total score or citation count and the amount it's changed in the past year (altmetric) or month (Scopus
+        &amp;
+        WoS) will be displayed.
+      </div>
+    </paper-card>
+
+    <template is="dom-repeat" items="[[cards]]" as="card">
+      <!--<template repeat="0">-->
+      <paper-card hidden$="[[_computeHidden(card, publications)]]" heading="[[card.title]]" elevation="2">
+        <template is="dom-repeat" items="[[_computeItems(card, publications)]]" as="pub" index-as="index">
+          <div class="card-actions trending-line">
+            <div class="title">
+              <a href$="[[_computeHref(pub)]]" title="View [[pub.title]] on eSpace">
+                <div class="line1">[[pub.title]]</div>
+                <div class="authors caption"><span class="body1">[[formatAuthors(pub.authors)]]</span> —
+                  <span>[[showYear(pub.rek_date)]]</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="num-cites stat">
+              <template is="dom-if" if="[[pub.citation_url]]">
+                <a href$="[[pub.citation_url]]" title="[[card.title]] details for this publication">
+                  <div class$="[[card.type]]">
+                    <span aria-label$="[[card.title]] [[pub.count]]">[[pub.count]]</span><span aria-label$="Statistic difference [[differenceFormat(pub.difference)]]" class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
+                  </div>
+                </a>
+              </template>
+              <template is="dom-if" if="[[!pub.citation_url]]">
+                <div class$="[[card.type]]">
+                  <span aria-label$="[[card.title]] [[pub.count]]">[[pub.count]]</span><span aria-label$="Statistic difference [[differenceFormat(pub.difference)]]]" class="plus" hidden$="[[_computeHidden2(pub)]]">[[differenceFormat(pub.difference)]]</span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </paper-card>
+
+    </template>
+
+    <paper-card hidden$="[[!hideNoResultsMessage]]" class="info-header" elevation="2" heading="About these metrics">
+      <div class="card-content">
+        For the above metrics, the larger number is the total current citation count,
+        and the + (plus) value indicates how much the citation count has changed in the last month.
+        The Altmetric score plus value is slightly different, as it shows the 3 most recent increases first, ranging
+        from 1 day to 1 year.<br><br>
+
+        You can click on the number as a link to see who is citing each publication, or in the case of Altmetric who is
+        referencing
+        the publication in social media and news outlets.
+      </div>
+    </paper-card>
+
+    <paper-card heading="Research guides" elevation="2">
+      <a href="http://guides.library.uq.edu.au/getting-published">
+        <paper-icon-item class="border">
+          <iron-icon icon="description" item-icon></iron-icon>
+          Guide to getting published
+        </paper-icon-item>
+      </a>
+
+      <a href="http://guides.library.uq.edu.au/open-access">
+        <paper-icon-item class="border">
+          <iron-icon icon="description" item-icon></iron-icon>
+          Guide to open access
+        </paper-icon-item>
+      </a>
+
+      <a href="https://guides.library.uq.edu.au/for-researchers">
+        <paper-icon-item class="border">
+          <iron-icon icon="arrow-forward" item-icon></iron-icon>
+          See all research support
+        </paper-icon-item>
+      </a>
+    </paper-card>
+
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-research-trending.js"></script>
+</dom-module>

@@ -1,0 +1,92 @@
+<link rel="import" href="elements.html">
+
+<link rel="import" href="uqlibrary-research-styles.html">
+<link rel="import" href="uqlibrary-research-trending.html">
+<link rel="import" href="uqlibrary-research-metrics.html">
+
+
+
+<!--
+`<uqlibrary-research>` is an overview for users courses and academic output
+
+Example:
+
+    <uqlibrary-research></uqlibrary-research>
+
+@demo
+-->
+<dom-module id="uqlibrary-research">
+  <!-- Template -->
+  <template>
+    <!-- All element styles -->
+    <style is="custom-style" include="research-styles">
+      :host {
+        @apply --uql-app-host;
+      }
+
+      #content {
+        overflow: scroll;
+      }
+    </style>
+
+    <uqlibrary-api-account id="account" on-uqlibrary-api-account-loaded="accountLoaded"></uqlibrary-api-account>
+    <uqlibrary-api-authors-search id="authorsSearchApi"
+                                  on-uqlibrary-api-authors-search-loaded="autosuggestLoaded"></uqlibrary-api-authors-search>
+
+    <!--uqlibrary-ga id="ga" appname="Research"></uqlibrary-ga-->
+
+    <div id="content" class="fit" style="overflow: scroll;">
+      <uqlibrary-toolbar on-uqlibrary-toolbar-menu-clicked="toggleMenuDrawer"
+                         on-search-term-changed="loadAutosuggest"
+                         on-uqlibrary-toolbar-search-submitted="performSearch"
+                         on-uqlibrary-toolbar-clear-search-clicked="_clearSearch"
+                         enable-search="true"
+                         enable-menu="[[!standAlone]]"
+                         item-label="text"
+                         header-title="Research"
+                         id="toolbar"
+                         search-placeholder-text="Search for a researcher by name or username"
+      >
+      </uqlibrary-toolbar>
+
+      <paper-tabs id="tabs" selected="{{selectedTab}}">
+
+        <paper-tab name="Trending" id="tabTrending" aria-label="Trending research">
+          <div class="menu">
+            <div class="tabTitle layout vertical center">TRENDING PUBLICATIONS</div>
+          </div>
+        </paper-tab>
+
+        <paper-tab name="Metrics" id="tabMetrics" aria-label="Research metrics">
+          <div class="menu">
+            <div class="tabTitle layout vertical center">METRICS</div>
+          </div>
+        </paper-tab>
+      </paper-tabs>
+
+      <neon-animated-pages class="flex" id="animatedPages" entry-animation="slide-from-right-animation"
+                           exit-animation="slide-left-animation" selected="{{selectedTab}}" valueattr="name">
+
+        <section id="sectionTrending" name="Trending">
+          <uqlibrary-research-trending id="trendingElement"
+                                       on-uqlibrary-research-trending-loaded="trendingResearchLoaded">
+          </uqlibrary-research-trending>
+        </section>
+
+        <section id="sectionMetrics" name="Metrics">
+          <uqlibrary-research-metrics id="metricsElement">
+          </uqlibrary-research-metrics>
+        </section>
+
+        <section id="sectionPublications" name="Publications">
+          <div><h2>This is publications info</h2></div>
+        </section>
+
+      </neon-animated-pages>
+
+    </div>
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-research.js"></script>
+</dom-module>
