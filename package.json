@@ -37,5 +37,8 @@
     "npm": "^6",
     "node": "11.10.1"
   },
-  "engine-strict": true
+  "engine-strict": true,
+  "dependencies": {
+    "moment": "^2.10.3"
+  }
 }
